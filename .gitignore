@@ -1,0 +1,12 @@
+target/
+node_modules/
+frontend/.next/
+frontend/node_modules/
+frontend/out/
+build/
+.anchor/
+.arcium/
+.env
+.env.local
+*.log
+dist/

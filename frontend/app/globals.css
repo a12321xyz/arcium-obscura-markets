@@ -1,0 +1,55 @@
+@import "@solana/wallet-adapter-react-ui/styles.css";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 228 35% 5%;
+    --foreground: 190 45% 96%;
+    --card: 228 31% 8%;
+    --card-foreground: 190 45% 96%;
+    --primary: 186 100% 50%;
+    --primary-foreground: 224 50% 6%;
+    --secondary: 260 85% 62%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 226 22% 14%;
+    --muted-foreground: 194 15% 68%;
+    --accent: 312 90% 62%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 83% 58%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 222 24% 17%;
+    --input: 222 24% 17%;
+    --ring: 186 100% 50%;
+    --radius: 1rem;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply min-h-screen bg-background text-foreground antialiased;
+    background:
+      radial-gradient(circle at 18% 10%, rgba(0, 229, 255, 0.16), transparent 30rem),
+      radial-gradient(circle at 82% 4%, rgba(137, 84, 255, 0.18), transparent 28rem),
+      radial-gradient(circle at 70% 95%, rgba(244, 63, 218, 0.11), transparent 36rem),
+      #070a14;
+  }
+}
+
+.wallet-adapter-button-trigger {
+  border-radius: 9999px !important;
+  background: linear-gradient(135deg, #00e5ff, #8b5cf6) !important;
+  color: #030712 !important;
+  font-weight: 800 !important;
+}
+
+.glass-panel {
+  background: linear-gradient(180deg, rgba(255,255,255,0.075), rgba(255,255,255,0.035));
+  border: 1px solid rgba(255,255,255,0.11);
+  box-shadow: 0 24px 80px rgba(0,0,0,0.34);
+  backdrop-filter: blur(18px);
+}

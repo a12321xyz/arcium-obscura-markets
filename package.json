@@ -1,0 +1,43 @@
+{
+  "name": "arcium-obscura-markets",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Private prediction and opinion markets on Solana using Arcium Obscura Markets.",
+  "scripts": {
+    "arcium:build": "arcium build",
+    "arcium:test": "arcium test",
+    "arcium:deploy:devnet": "arcium deploy --provider.cluster devnet",
+    "anchor:test": "anchor test",
+    "test": "ts-mocha -p ./tsconfig.json -t 1000000 tests/**/*.ts",
+    "frontend:dev": "npm --prefix frontend run dev",
+    "frontend:build": "npm --prefix frontend run build",
+    "frontend:lint": "npm --prefix frontend run lint"
+  },
+  "dependencies": {
+    "@arcium-hq/client": "0.9.7",
+    "@coral-xyz/anchor": "^0.32.1",
+    "@noble/hashes": "^1.8.0",
+    "@solana/web3.js": "^1.98.4",
+    "bn.js": "^5.2.2"
+  },
+  "devDependencies": {
+    "@types/bn.js": "^5.2.0",
+    "@types/chai": "^4.3.20",
+    "@types/mocha": "^10.0.10",
+    "@types/node": "^20.17.30",
+    "chai": "^4.5.0",
+    "mocha": "^10.8.2",
+    "prettier": "^3.5.3",
+    "ts-mocha": "^10.0.0",
+    "typescript": "^5.8.3"
+  },
+  "keywords": [
+    "arcium",
+    "solana",
+    "anchor",
+    "mpc",
+    "prediction-market",
+    "privacy"
+  ],
+  "license": "MIT"
+}
