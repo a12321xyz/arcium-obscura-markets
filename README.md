@@ -157,12 +157,11 @@ Use `https://api.devnet.solana.com` and your deployed program id for the env val
 
 ## 🎬 Demo & Proof of Work
 
-- **Live Submission URL**: [Link to your Vercel deployment]
+- **Live Submission URL**: [Your Vercel URL will appear here]
 - **Devnet Program ID**: `29bVaakfeBhFm8BbqkehH3iMxHvRYwZ9QHecsi4kJ7on`
-- **Video Demo**: [Link to Loom/YouTube]
 - **Screenshots**:
-  ![Landing Page](https://via.placeholder.com/800x450?text=Arcium+Obscura+Markets+Hero)
-  ![Encrypted Bet](https://via.placeholder.com/800x450?text=Encrypted+Betting+Flow)
+  ![Landing Page](https://via.placeholder.com/800x450?text=Arcium+Obscura+Markets+Dashboard)
+  ![Encrypted Bet](https://via.placeholder.com/800x450?text=Encrypted+MPC+Betting+Flow)
 
 ## 🛡️ Detailed Security Model
 
