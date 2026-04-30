@@ -9,6 +9,7 @@
     "arcium:deploy:devnet": "arcium deploy --provider.cluster devnet",
     "anchor:test": "anchor test",
     "test": "ts-mocha -p ./tsconfig.json -t 1000000 tests/**/*.ts",
+    "build": "npm --prefix frontend run build",
     "frontend:dev": "npm --prefix frontend run dev",
     "frontend:build": "npm --prefix frontend run build",
     "frontend:lint": "npm --prefix frontend run lint"
