@@ -153,6 +153,22 @@ pub mod arcium_obscura_markets {
         Ok(())
     }
 
+    pub fn force_open_market(ctx: Context<ForceOpenMarket>) -> Result<()> {
+        let market = &mut ctx.accounts.market;
+        require!(market.creator == ctx.accounts.creator.key(), ErrorCode::Unauthorized);
+        require!(market.status == MarketStatus::Initializing, ErrorCode::MarketNotOpen);
+        market.encrypted_state = [[0u8; 32]; 6];
+        market.state_nonce = 0;
+        market.status = MarketStatus::Open;
+
+        emit!(MarketForceOpenedEvent {
+            market: market.key(),
+            creator: market.creator,
+        });
+
+        Ok(())
+    }
+
     pub fn place_encrypted_bet(
         ctx: Context<PlaceEncryptedBet>,
         computation_offset: u64,
@@ -764,6 +780,13 @@ pub struct InitM8Callback<'info> {
 }
 
 #[derive(Accounts)]
+pub struct ForceOpenMarket<'info> {
+    pub creator: Signer<'info>,
+    #[account(mut)]
+    pub market: Box<Account<'info, Market>>,
+}
+
+#[derive(Accounts)]
 #[instruction(computation_offset: u64, bet_id: u64)]
 pub struct PlaceEncryptedBet<'info> {
     #[account(mut)]
@@ -1171,6 +1194,12 @@ pub struct MarketInitializedEvent {
     pub market_id: u64,
     pub kind: MarketKind,
     pub end_time: i64,
+}
+
+#[event]
+pub struct MarketForceOpenedEvent {
+    pub market: Pubkey,
+    pub creator: Pubkey,
 }
 
 #[event]

@@ -37,9 +37,9 @@ export async function encryptBetPayload(input: {
   const commitment = betCommitment({ ...input, salt });
 
   return {
-    encryptedAmount: Array.from(ciphertext[0]),
-    encryptedOutcome: Array.from(ciphertext[1]),
-    encryptionPubkey: Array.from(publicKey),
+    encryptedAmount: Array.from(ciphertext[0]).map((b) => b & 0xff),
+    encryptedOutcome: Array.from(ciphertext[1]).map((b) => b & 0xff),
+    encryptionPubkey: Array.from(publicKey).map((b) => b & 0xff),
     nonce: deserializeLittleEndian(nonce).toString(),
     salt,
     commitment

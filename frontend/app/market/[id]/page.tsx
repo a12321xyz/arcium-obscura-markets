@@ -2,12 +2,14 @@
 
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
+import { PublicKey } from "@solana/web3.js";
 import { useConnection, useWallet } from "@solana/wallet-adapter-react";
-import { Clock, LockKeyhole, Radar, ShieldAlert, ShieldCheck, Trophy, Users } from "lucide-react";
+import { Clock, Loader2, LockKeyhole, Radar, ShieldAlert, ShieldCheck, Trophy, Unlock, Users } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { BetPanel } from "@/components/bet-panel";
-import { fetchMarketByAddress } from "@/lib/program";
+import { fetchMarketByAddress, forceOpenMarketTx, getAnchorProvider } from "@/lib/program";
 import { Market } from "@/lib/types";
 import { formatDateTime, formatLamports, percent, truncateAddress } from "@/lib/utils";
 
@@ -18,6 +20,25 @@ export default function MarketPage() {
   const { publicKey } = wallet;
   const [market, setMarket] = useState<Market | null>(null);
   const [loading, setLoading] = useState(true);
+  const [forceOpening, setForceOpening] = useState(false);
+  const [forceOpenError, setForceOpenError] = useState<string | null>(null);
+
+  async function handleForceOpen() {
+    if (!market || !wallet.publicKey) return;
+    setForceOpening(true);
+    setForceOpenError(null);
+    try {
+      const provider = getAnchorProvider(connection, wallet);
+      const marketKey = new PublicKey(market.address);
+      await forceOpenMarketTx({ provider, market: marketKey });
+      const updated = await fetchMarketByAddress(connection, wallet, market.address);
+      if (updated) setMarket(updated);
+    } catch (e) {
+      setForceOpenError(e instanceof Error ? e.message : "Failed to force-open market");
+    } finally {
+      setForceOpening(false);
+    }
+  }
 
   useEffect(() => {
     let active = true;
@@ -80,6 +101,22 @@ export default function MarketPage() {
               </Badge>
             )}
           </div>
+          {market.status === "Initializing" && publicKey && publicKey.toBase58() === market.creator && (
+            <div className="mb-4">
+              <Button
+                size="sm"
+                disabled={forceOpening}
+                onClick={handleForceOpen}
+                className="rounded-xl font-bold"
+              >
+                {forceOpening ? <Loader2 className="mr-2 h-3.5 w-3.5 animate-spin" /> : <Unlock className="mr-2 h-3.5 w-3.5" />}
+                Force Open Market (skip MPC init)
+              </Button>
+              {forceOpenError && (
+                <p className="mt-2 font-mono text-[11px] text-red-400/80">{forceOpenError}</p>
+              )}
+            </div>
+          )}
           <h1 className="text-4xl font-black tracking-tight sm:text-6xl leading-[1.1] max-w-4xl">
             {market.question}
           </h1>

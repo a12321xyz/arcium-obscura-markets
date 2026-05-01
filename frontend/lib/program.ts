@@ -64,7 +64,7 @@ function leU64(value: bigint) {
 
 function readU32Le(bytesLike: Uint8Array | number[]) {
   const bytes = bytesLike instanceof Uint8Array ? bytesLike : new Uint8Array(bytesLike);
-  return bytes[0] | (bytes[1] << 8) | (bytes[2] << 16) | (bytes[3] << 24);
+  return (bytes[0] | (bytes[1] << 8) | (bytes[2] << 16) | (bytes[3] << 24)) >>> 0;
 }
 
 function enumName(value: unknown): string {
@@ -293,6 +293,20 @@ export async function placeBetTx(input: {
       ...accounts
     })
     .rpc({ skipPreflight: true, commitment: "confirmed" });
+}
+
+export async function forceOpenMarketTx(input: {
+  provider: AnchorProvider;
+  market: PublicKey;
+}) {
+  const program = getProgram(input.provider);
+  return program.methods
+    .forceOpenMarket()
+    .accountsPartial({
+      creator: input.provider.wallet.publicKey,
+      market: input.market,
+    })
+    .rpc({ commitment: "confirmed" });
 }
 
 export async function claimWinningsTx(input: {

@@ -40,6 +40,15 @@ export const ARCIUM_OBSCURA_MARKETS_IDL: Idl = {
       ]
     },
     {
+      "name": "force_open_market",
+      "discriminator": [20, 109, 242, 112, 142, 161, 36, 190],
+      "accounts": [
+        { "name": "creator", "writable": false, "signer": true },
+        { "name": "market", "writable": true }
+      ],
+      "args": []
+    },
+    {
       "name": "place_encrypted_bet",
       "discriminator": [31, 225, 208, 210, 139, 191, 29, 247],
       "accounts": [

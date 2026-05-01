@@ -98,7 +98,12 @@ export function BetPanel({ market }: { market: Market }) {
       setStep("PROCESSING_MPC");
       setStatus(`Success! Your bet is on-chain. The Arcium MPC cluster is now finalizing the aggregate pools.`);
     } catch (error) {
-      setStatus(error instanceof Error ? error.message : "Unable to place encrypted bet.");
+      const msg = error instanceof Error ? error.message : "Unable to place encrypted bet.";
+      console.error("[BetPanel] Place bet error:", error);
+      if (error instanceof Error && error.stack) {
+        console.error("[BetPanel] Stack trace:", error.stack);
+      }
+      setStatus(msg);
       setStep("IDLE");
     } finally {
       setLoading(false);
