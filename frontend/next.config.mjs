@@ -5,6 +5,8 @@ const nextConfig = {
     "@solana/wallet-adapter-base",
     "@solana/wallet-adapter-react",
     "@solana/wallet-adapter-react-ui",
+    "@solana/wallet-adapter-backpack",
+    "@solana/wallet-adapter-solflare",
     "@arcium-hq/client"
   ],
   webpack: (config) => {
