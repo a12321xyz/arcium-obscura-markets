@@ -41,7 +41,7 @@ describe("Arcium Obscura Markets", () => {
     payer = readKpJson(`${os.homedir()}/.config/solana/id.json`);
     mxePublicKey = await getMXEPublicKeyWithRetry(provider, program.programId);
     for (const circuit of [
-      "init_market_state",
+      "init_m8",
       "place_bet",
       "resolve_prediction_market",
       "resolve_opinion_market",
@@ -74,7 +74,7 @@ describe("Arcium Obscura Markets", () => {
         market,
         vault,
         systemProgram: SystemProgram.programId,
-        ...arciumAccounts(createOffset, "init_market_state"),
+        ...arciumAccounts(createOffset, "init_m8"),
       })
       .signers([payer])
       .rpc({ skipPreflight: true, commitment: "confirmed" });
@@ -207,7 +207,7 @@ describe("Arcium Obscura Markets", () => {
     const addressLookupTable = getLookupTableAddress(program.programId, mxeAcc.lutOffsetSlot);
 
     const methodByCircuit: Record<string, string> = {
-      init_market_state: "initMarketStateCompDef",
+      init_m8: "initM8CompDef",
       place_bet: "initPlaceBetCompDef",
       resolve_prediction_market: "initResolvePredictionMarketCompDef",
       resolve_opinion_market: "initResolveOpinionMarketCompDef",

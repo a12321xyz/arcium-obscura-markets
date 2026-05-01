@@ -67,7 +67,9 @@ export default function MarketPage() {
             <Badge className={`rounded-full px-4 py-1 text-xs font-bold uppercase tracking-wider border-transparent ${
               market.status === "Open" ? "bg-green-500/20 text-green-400" : 
               market.status === "Resolved" ? "bg-primary/20 text-primary border-primary/20" :
-              market.status === "Initializing" ? "bg-yellow-500/20 text-yellow-400" :
+              market.status === "Resolving" ? "bg-yellow-500/20 text-yellow-400" :
+              market.status === "Cancelled" ? "bg-red-500/20 text-red-400" :
+              market.status === "Initializing" ? "bg-blue-500/20 text-blue-400" :
               "bg-white/10 text-muted-foreground"
             }`}>
               {market.status}

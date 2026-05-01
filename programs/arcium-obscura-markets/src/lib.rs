@@ -687,7 +687,7 @@ pub struct InitializeMarket<'info> {
         init_if_needed,
         space = 9,
         payer = creator,
-        seeds = [b"ArciumSignerAccount"],
+        seeds = [&SIGN_PDA_SEED],
         bump,
     )]
     pub sign_pda_account: Box<Account<'info, ArciumSignerAccount>>,
@@ -784,7 +784,7 @@ pub struct PlaceEncryptedBet<'info> {
         init_if_needed,
         space = 9,
         payer = bettor,
-        seeds = [b"ArciumSignerAccount"],
+        seeds = [&SIGN_PDA_SEED],
         bump,
     )]
     pub sign_pda_account: Box<Account<'info, ArciumSignerAccount>>,
