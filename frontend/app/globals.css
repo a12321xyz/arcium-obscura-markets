@@ -6,6 +6,7 @@
 
 @layer base {
   :root {
+    color-scheme: dark;
     --background: 228 35% 5%;
     --foreground: 190 45% 96%;
     --card: 228 31% 8%;

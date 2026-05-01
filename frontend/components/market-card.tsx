@@ -7,8 +7,6 @@ import { Market } from "@/lib/types";
 import { formatDateTime, formatLamports, percent } from "@/lib/utils";
 
 export function MarketCard({ market }: { market: Market }) {
-  const total = market.publicOutcomePools.reduce((sum, value) => sum + value, 0);
-
   return (
     <Card className="group relative overflow-hidden rounded-[2rem] border-white/10 bg-white/[0.03] transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-glow hover:bg-white/[0.05]">
       <div className="absolute -right-12 -top-12 h-32 w-32 rounded-full bg-primary/10 blur-3xl transition-opacity group-hover:opacity-100" />
@@ -22,10 +20,10 @@ export function MarketCard({ market }: { market: Market }) {
             <Badge className={`rounded-full px-3 py-0.5 text-[10px] font-bold uppercase tracking-wider border-transparent ${
               market.status === "Open" ? "bg-green-500/20 text-green-400" : 
               market.status === "Resolved" ? "bg-primary/20 text-primary border-primary/20" :
-              market.status === "Cancelled" ? "bg-red-500/20 text-red-400" :
+              market.status === "Initializing" ? "bg-yellow-500/20 text-yellow-400" :
               "bg-white/10 text-muted-foreground"
             }`}>
-              {market.status === "Cancelled" ? "Refund Active" : market.status}
+              {market.status}
             </Badge>
           </div>
           <LockKeyhole className="h-5 w-5 text-primary/40 transition-colors group-hover:text-primary" />
@@ -35,36 +33,23 @@ export function MarketCard({ market }: { market: Market }) {
           {market.question}
         </h3>
 
-        <div className="mt-8 space-y-4">
-          {market.outcomes.map((outcome, index) => {
-            const pool = market.publicOutcomePools[index] ?? 0;
-            const share = total > 0 ? pool / total : 1 / market.outcomes.length;
-            const percentage = percent(share);
-            
-            return (
-              <div key={outcome} className="relative">
-                <div className="mb-2 flex justify-between text-xs font-bold uppercase tracking-wider">
-                  <span className="text-foreground/80">{outcome}</span>
-                  <span className="text-primary">{percentage}</span>
-                </div>
-                <div className="h-2.5 overflow-hidden rounded-full bg-white/5 border border-white/5">
-                  <div
-                    className="h-full rounded-full bg-gradient-to-r from-primary via-secondary to-accent transition-all duration-1000 ease-out"
-                    style={{ width: percentage }}
-                  />
-                </div>
-              </div>
-            );
-          })}
+        <div className="mt-8 space-y-3">
+          <div className="flex items-center gap-2 rounded-xl bg-white/[0.03] border border-white/5 p-3 text-[10px] font-bold uppercase tracking-widest text-primary">
+            <LockKeyhole className="h-3 w-3" /> Encrypted Arcium Pools
+          </div>
+          {market.outcomes.map((outcome) => (
+            <div key={outcome} className="relative flex items-center justify-between rounded-xl border border-white/5 bg-white/[0.02] px-4 py-2.5">
+              <span className="text-xs font-bold uppercase tracking-wider text-foreground/80">{outcome}</span>
+              <div className="h-1.5 w-1.5 rounded-full bg-primary/40 animate-pulse" />
+            </div>
+          ))}
         </div>
 
         <div className="mt-8 grid grid-cols-3 gap-2">
           {[
-            { label: "Volume", value: formatLamports(market.publicPoolLamports), icon: Radar },
-            { label: "Bets", value: market.acceptedBetCount, icon: Users },
-            market.kind === "Opinion" 
-              ? { label: "Quorum", value: `${market.acceptedBetCount}/${market.quorum}`, icon: ShieldCheck }
-              : { label: "Ends", value: formatDateTime(market.endTime).split(',')[0], icon: Clock }
+            { label: "Staked", value: formatLamports(Number(market.publicPoolLamports)), icon: Radar },
+            { label: "Ends", value: formatDateTime(market.endTime).split(',')[0], icon: Clock },
+            { label: "Status", value: market.status, icon: ShieldCheck }
           ].map((stat) => (
             <div key={stat.label} className="rounded-2xl bg-white/[0.03] border border-white/5 p-3 transition-colors group-hover:bg-white/[0.06]">
               <p className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground mb-1">{stat.label}</p>

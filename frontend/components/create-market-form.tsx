@@ -174,6 +174,7 @@ export function CreateMarketForm() {
                 type="datetime-local" 
                 value={endDate} 
                 onChange={(event) => setEndDate(event.target.value)} 
+                onClick={(e) => (e.currentTarget as any).showPicker?.()}
                 className="h-12 bg-white/[0.03] border-white/10 rounded-xl"
                 required 
               />

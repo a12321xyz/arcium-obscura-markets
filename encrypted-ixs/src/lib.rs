@@ -15,13 +15,13 @@ mod circuits {
         pub outcome_1_pool: u64,
         pub outcome_2_pool: u64,
         pub outcome_3_pool: u64,
-        pub bet_count: u32,
+        pub bet_count: u64,
     }
 
     pub const PAYOUT_SCALE: u64 = 1_000_000;
 
     #[instruction]
-    pub fn init_market_state() -> Enc<Mxe, MarketPrivateState> {
+    pub fn init_m8() -> Enc<Mxe, MarketPrivateState> {
         Mxe::get().from_arcis(MarketPrivateState {
             total_pool: 0,
             outcome_0_pool: 0,
@@ -101,7 +101,7 @@ mod circuits {
         quorum: u32,
     ) -> (u8, u64, u64, u64, bool) {
         let state = state_ctxt.to_arcis();
-        let quorum_met = state.bet_count >= quorum;
+        let quorum_met = state.bet_count >= quorum as u64;
         let mut winning_outcome = 0u8;
         let mut winning_pool = state.outcome_0_pool;
 

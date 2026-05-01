@@ -1,0 +1,204 @@
+Streaming transaction logs mentioning ydrxmpqAVEYBhSWaqYScMh4yCsBLFb7e7jQuQJvjyR4. Confirmed commitment
+Transaction executed in slot 459327802:
+  Signature: 25eGpnmrVrViFQ8yw6gmoPRj1YRnZjHgeUTGtmKYAdNop3FLrs7XqvPLP3YeTzUWtrcBWseXXLzssuPy5BynLfFv
+  Status: Ok
+  Log Messages:
+    Program ydrxmpqAVEYBhSWaqYScMh4yCsBLFb7e7jQuQJvjyR4 invoke [1]
+    Program log: Instruction: InitializeMarket
+    Program 11111111111111111111111111111111 invoke [2]
+    Program 11111111111111111111111111111111 success
+    Program log: Sign PDA: HYPiPzCDhZBMcHLrniCkarYU3kR56XNiupwLXn8CLMZA
+    Program log: Cluster Account: DzaQCyfybroycrNqE5Gk7LhSbWD2qfCics6qptBFbr95
+    Program log: Sign PDA Bump: 254
+    Program Arcj82pX7HxYKLR92qvgZUAd7vGS1k4hQvAFcPATFdEQ invoke [2]
+    Program log: Instruction: QueueComputation
+    Program 11111111111111111111111111111111 invoke [3]
+    Program 11111111111111111111111111111111 success
+    Program 11111111111111111111111111111111 invoke [3]
+    Program 11111111111111111111111111111111 success
+    Program data: ETN84kZhOroaPUbv1lwqqA6CNGLin92ea3lcWA4cAibUMeyL9ll5Gq2tyf404CCT
+    Program data: djUhqSAOxZMaPUbv1lwqqA6CNGLin92ea3lcWA4cAibUMeyL9ll5Gq2tyf404CCT
+    Program Arcj82pX7HxYKLR92qvgZUAd7vGS1k4hQvAFcPATFdEQ consumed 48420 of 124231 compute units
+    Program Arcj82pX7HxYKLR92qvgZUAd7vGS1k4hQvAFcPATFdEQ success
+    Program ydrxmpqAVEYBhSWaqYScMh4yCsBLFb7e7jQuQJvjyR4 consumed 126845 of 200000 compute units
+    Program ydrxmpqAVEYBhSWaqYScMh4yCsBLFb7e7jQuQJvjyR4 success
+Transaction executed in slot 459327807:
+  Signature: 67PKsKj6uKwTCf4m9Y9ug5Z6FtAgpNmnaaDmjUsjbyNzKPR6Zb9pdwwzZHLcabe9qrHaHxpdcHJkxXhgNxyHNTpn
+  Status: Error processing Instruction 2: custom program error: 0x1770
+  Log Messages:
+    Program ComputeBudget111111111111111111111111111111 invoke [1]
+    Program ComputeBudget111111111111111111111111111111 success
+    Program Arcj82pX7HxYKLR92qvgZUAd7vGS1k4hQvAFcPATFdEQ invoke [1]
+    Program log: Instruction: CallbackComputation
+    Program data: m9Xun/BMpxMaPUbv1lwqqA6CNGLin92ea3lcWA4cAibUMeyL9ll5Gq2tyf404CCT
+    Program data: G0t13b/V/fkaPUbv1lwqqA6CNGLin92ea3lcWA4cAibUMeyL9ll5Gq2tyf404CCTAQIxk/1oMmZ8h5A6XxcWVDCSO/WLiZBzF1W5tQZvUIumGA==
+    Program Arcj82pX7HxYKLR92qvgZUAd7vGS1k4hQvAFcPATFdEQ consumed 35550 of 802850 compute units
+    Program Arcj82pX7HxYKLR92qvgZUAd7vGS1k4hQvAFcPATFdEQ success
+    Program ydrxmpqAVEYBhSWaqYScMh4yCsBLFb7e7jQuQJvjyR4 invoke [1]
+    Program log: Instruction: InitM6Callback
+    Program log: Verify output failed with error: AnchorError(AnchorError { error_name: "AbortedComputation", error_code_number: 6000, error_msg: "AbortedComputation", error_origin: None, compared_values: None })
+    Program log: AnchorError occurred. Error Code: AbortedComputation. Error Number: 6000. Error Message: The Arcium computation was aborted.
+    Program ydrxmpqAVEYBhSWaqYScMh4yCsBLFb7e7jQuQJvjyR4 consumed 21427 of 767300 compute units
+    Program ydrxmpqAVEYBhSWaqYScMh4yCsBLFb7e7jQuQJvjyR4 failed: custom program error: 0x1770
+Transaction executed in slot 459327807:
+  Signature: 2WWudMvmY7fmBzCFgLhzYU42SgdzHqYaDmq6uXwTpdVACaEbGjU9Ai3WQAdHVtDQEte6z8eWKqQUjxNqAzuRyZ6
+  Status: Error processing Instruction 2: custom program error: 0x1770
+  Log Messages:
+    Program ComputeBudget111111111111111111111111111111 invoke [1]
+    Program ComputeBudget111111111111111111111111111111 success
+    Program Arcj82pX7HxYKLR92qvgZUAd7vGS1k4hQvAFcPATFdEQ invoke [1]
+    Program log: Instruction: CallbackComputation
+    Program data: m9Xun/BMpxMaPUbv1lwqqA6CNGLin92ea3lcWA4cAibUMeyL9ll5Gq2tyf404CCT
+    Program data: G0t13b/V/fkaPUbv1lwqqA6CNGLin92ea3lcWA4cAibUMeyL9ll5Gq2tyf404CCTAQLFTIDvzzXKYaYJn6cmZBVhN/59LuW4NmL4i70h+0GH6A==
+    Program Arcj82pX7HxYKLR92qvgZUAd7vGS1k4hQvAFcPATFdEQ consumed 35550 of 802850 compute units
+    Program Arcj82pX7HxYKLR92qvgZUAd7vGS1k4hQvAFcPATFdEQ success
+    Program ydrxmpqAVEYBhSWaqYScMh4yCsBLFb7e7jQuQJvjyR4 invoke [1]
+    Program log: Instruction: InitM6Callback
+    Program log: Verify output failed with error: AnchorError(AnchorError { error_name: "AbortedComputation", error_code_number: 6000, error_msg: "AbortedComputation", error_origin: None, compared_values: None })
+    Program log: AnchorError occurred. Error Code: AbortedComputation. Error Number: 6000. Error Message: The Arcium computation was aborted.
+    Program ydrxmpqAVEYBhSWaqYScMh4yCsBLFb7e7jQuQJvjyR4 consumed 21427 of 767300 compute units
+    Program ydrxmpqAVEYBhSWaqYScMh4yCsBLFb7e7jQuQJvjyR4 failed: custom program error: 0x1770
+Transaction executed in slot 459327812:
+  Signature: 5B3SUvaGpju3d4yrPjCn53euazNxT6pD8zMXe4eZZHQkzVCrNDHkDaiXwbfkVNgDoLvvc2Hs3wti1vyBLyMwkeyK
+  Status: Error processing Instruction 2: custom program error: 0x1770
+  Log Messages:
+    Program ComputeBudget111111111111111111111111111111 invoke [1]
+    Program ComputeBudget111111111111111111111111111111 success
+    Program Arcj82pX7HxYKLR92qvgZUAd7vGS1k4hQvAFcPATFdEQ invoke [1]
+    Program log: Instruction: CallbackComputation
+    Program data: m9Xun/BMpxMaPUbv1lwqqA6CNGLin92ea3lcWA4cAibUMeyL9ll5Gq2tyf404CCT
+    Program data: G0t13b/V/fkaPUbv1lwqqA6CNGLin92ea3lcWA4cAibUMeyL9ll5Gq2tyf404CCTAQIxk/1oMmZ8h5A6XxcWVDCSO/WLiZBzF1W5tQZvUIumGA==
+    Program Arcj82pX7HxYKLR92qvgZUAd7vGS1k4hQvAFcPATFdEQ consumed 35575 of 802850 compute units
+    Program Arcj82pX7HxYKLR92qvgZUAd7vGS1k4hQvAFcPATFdEQ success
+    Program ydrxmpqAVEYBhSWaqYScMh4yCsBLFb7e7jQuQJvjyR4 invoke [1]
+    Program log: Instruction: InitM6Callback
+    Program log: Verify output failed with error: AnchorError(AnchorError { error_name: "AbortedComputation", error_code_number: 6000, error_msg: "AbortedComputation", error_origin: None, compared_values: None })
+    Program log: AnchorError occurred. Error Code: AbortedComputation. Error Number: 6000. Error Message: The Arcium computation was aborted.
+    Program ydrxmpqAVEYBhSWaqYScMh4yCsBLFb7e7jQuQJvjyR4 consumed 21427 of 767275 compute units
+    Program ydrxmpqAVEYBhSWaqYScMh4yCsBLFb7e7jQuQJvjyR4 failed: custom program error: 0x1770
+Transaction executed in slot 459327812:
+  Signature: 5AthgzxWFYxbmf5AUB6gFUxiFjHPbyoZqfqHYxmKME18TvJxRhZGo6ztUDdd76XjqogPXXBuM97S2u13KrZNcV1F
+  Status: Error processing Instruction 2: custom program error: 0x1770
+  Log Messages:
+    Program ComputeBudget111111111111111111111111111111 invoke [1]
+    Program ComputeBudget111111111111111111111111111111 success
+    Program Arcj82pX7HxYKLR92qvgZUAd7vGS1k4hQvAFcPATFdEQ invoke [1]
+    Program log: Instruction: CallbackComputation
+    Program data: m9Xun/BMpxMaPUbv1lwqqA6CNGLin92ea3lcWA4cAibUMeyL9ll5Gq2tyf404CCT
+    Program data: G0t13b/V/fkaPUbv1lwqqA6CNGLin92ea3lcWA4cAibUMeyL9ll5Gq2tyf404CCTAQLFTIDvzzXKYaYJn6cmZBVhN/59LuW4NmL4i70h+0GH6A==
+    Program Arcj82pX7HxYKLR92qvgZUAd7vGS1k4hQvAFcPATFdEQ consumed 35575 of 802850 compute units
+    Program Arcj82pX7HxYKLR92qvgZUAd7vGS1k4hQvAFcPATFdEQ success
+    Program ydrxmpqAVEYBhSWaqYScMh4yCsBLFb7e7jQuQJvjyR4 invoke [1]
+    Program log: Instruction: InitM6Callback
+    Program log: Verify output failed with error: AnchorError(AnchorError { error_name: "AbortedComputation", error_code_number: 6000, error_msg: "AbortedComputation", error_origin: None, compared_values: None })
+    Program log: AnchorError occurred. Error Code: AbortedComputation. Error Number: 6000. Error Message: The Arcium computation was aborted.
+    Program ydrxmpqAVEYBhSWaqYScMh4yCsBLFb7e7jQuQJvjyR4 consumed 21427 of 767275 compute units
+    Program ydrxmpqAVEYBhSWaqYScMh4yCsBLFb7e7jQuQJvjyR4 failed: custom program error: 0x1770
+Transaction executed in slot 459327820:
+  Signature: 4gXtnTHZpiRUz3hKaFuXBdJABMd2Ek2UTvRXC2AD6LBMmtW4pDFthruTxguL2ExSxhpBxiobb3MbpP4XWe2SkUCJ
+  Status: Error processing Instruction 2: custom program error: 0x1770
+  Log Messages:
+    Program ComputeBudget111111111111111111111111111111 invoke [1]
+    Program ComputeBudget111111111111111111111111111111 success
+    Program Arcj82pX7HxYKLR92qvgZUAd7vGS1k4hQvAFcPATFdEQ invoke [1]
+    Program log: Instruction: CallbackComputation
+    Program data: m9Xun/BMpxMaPUbv1lwqqA6CNGLin92ea3lcWA4cAibUMeyL9ll5Gq2tyf404CCT
+    Program data: G0t13b/V/fkaPUbv1lwqqA6CNGLin92ea3lcWA4cAibUMeyL9ll5Gq2tyf404CCTAQIxk/1oMmZ8h5A6XxcWVDCSO/WLiZBzF1W5tQZvUIumGA==
+    Program Arcj82pX7HxYKLR92qvgZUAd7vGS1k4hQvAFcPATFdEQ consumed 35602 of 802850 compute units
+    Program Arcj82pX7HxYKLR92qvgZUAd7vGS1k4hQvAFcPATFdEQ success
+    Program ydrxmpqAVEYBhSWaqYScMh4yCsBLFb7e7jQuQJvjyR4 invoke [1]
+    Program log: Instruction: InitM6Callback
+    Program log: Verify output failed with error: AnchorError(AnchorError { error_name: "AbortedComputation", error_code_number: 6000, error_msg: "AbortedComputation", error_origin: None, compared_values: None })
+    Program log: AnchorError occurred. Error Code: AbortedComputation. Error Number: 6000. Error Message: The Arcium computation was aborted.
+    Program ydrxmpqAVEYBhSWaqYScMh4yCsBLFb7e7jQuQJvjyR4 consumed 21427 of 767248 compute units
+    Program ydrxmpqAVEYBhSWaqYScMh4yCsBLFb7e7jQuQJvjyR4 failed: custom program error: 0x1770
+Transaction executed in slot 459327820:
+  Signature: 4cvjX9DSegRf6ufVGUcatAcubGFkszuWu7MWi5xycm7J67XcnaF28hE3TY53XEVMoHypd4dCrKYCxo4bJDn8V7k2
+  Status: Error processing Instruction 2: custom program error: 0x1770
+  Log Messages:
+    Program ComputeBudget111111111111111111111111111111 invoke [1]
+    Program ComputeBudget111111111111111111111111111111 success
+    Program Arcj82pX7HxYKLR92qvgZUAd7vGS1k4hQvAFcPATFdEQ invoke [1]
+    Program log: Instruction: CallbackComputation
+    Program data: m9Xun/BMpxMaPUbv1lwqqA6CNGLin92ea3lcWA4cAibUMeyL9ll5Gq2tyf404CCT
+    Program data: G0t13b/V/fkaPUbv1lwqqA6CNGLin92ea3lcWA4cAibUMeyL9ll5Gq2tyf404CCTAQLFTIDvzzXKYaYJn6cmZBVhN/59LuW4NmL4i70h+0GH6A==
+    Program Arcj82pX7HxYKLR92qvgZUAd7vGS1k4hQvAFcPATFdEQ consumed 35602 of 802850 compute units
+    Program Arcj82pX7HxYKLR92qvgZUAd7vGS1k4hQvAFcPATFdEQ success
+    Program ydrxmpqAVEYBhSWaqYScMh4yCsBLFb7e7jQuQJvjyR4 invoke [1]
+    Program log: Instruction: InitM6Callback
+    Program log: Verify output failed with error: AnchorError(AnchorError { error_name: "AbortedComputation", error_code_number: 6000, error_msg: "AbortedComputation", error_origin: None, compared_values: None })
+    Program log: AnchorError occurred. Error Code: AbortedComputation. Error Number: 6000. Error Message: The Arcium computation was aborted.
+    Program ydrxmpqAVEYBhSWaqYScMh4yCsBLFb7e7jQuQJvjyR4 consumed 21427 of 767248 compute units
+    Program ydrxmpqAVEYBhSWaqYScMh4yCsBLFb7e7jQuQJvjyR4 failed: custom program error: 0x1770
+Transaction executed in slot 459327832:
+  Signature: 4vWxumpsuKVFcts4UNyJtD3jFuxAkrrg99ErqAXdn5vjPcGxJeJAs23y5UaK1aqNTuJV1WAhdCJ9u1FW5N342GmS
+  Status: Error processing Instruction 2: custom program error: 0x1770
+  Log Messages:
+    Program ComputeBudget111111111111111111111111111111 invoke [1]
+    Program ComputeBudget111111111111111111111111111111 success
+    Program Arcj82pX7HxYKLR92qvgZUAd7vGS1k4hQvAFcPATFdEQ invoke [1]
+    Program log: Instruction: CallbackComputation
+    Program data: m9Xun/BMpxMaPUbv1lwqqA6CNGLin92ea3lcWA4cAibUMeyL9ll5Gq2tyf404CCT
+    Program data: G0t13b/V/fkaPUbv1lwqqA6CNGLin92ea3lcWA4cAibUMeyL9ll5Gq2tyf404CCTAQIxk/1oMmZ8h5A6XxcWVDCSO/WLiZBzF1W5tQZvUIumGA==
+    Program Arcj82pX7HxYKLR92qvgZUAd7vGS1k4hQvAFcPATFdEQ consumed 35589 of 802850 compute units
+    Program Arcj82pX7HxYKLR92qvgZUAd7vGS1k4hQvAFcPATFdEQ success
+    Program ydrxmpqAVEYBhSWaqYScMh4yCsBLFb7e7jQuQJvjyR4 invoke [1]
+    Program log: Instruction: InitM6Callback
+    Program log: Verify output failed with error: AnchorError(AnchorError { error_name: "AbortedComputation", error_code_number: 6000, error_msg: "AbortedComputation", error_origin: None, compared_values: None })
+    Program log: AnchorError occurred. Error Code: AbortedComputation. Error Number: 6000. Error Message: The Arcium computation was aborted.
+    Program ydrxmpqAVEYBhSWaqYScMh4yCsBLFb7e7jQuQJvjyR4 consumed 21427 of 767261 compute units
+    Program ydrxmpqAVEYBhSWaqYScMh4yCsBLFb7e7jQuQJvjyR4 failed: custom program error: 0x1770
+Transaction executed in slot 459327833:
+  Signature: 3vBgeLypSe9cbeB5GJYPLZ8B5PFmBFCDrQn2J244picjDKebui4BT2iKxyVkhqSxv5trgjmTYJFQs9SPk1xg5jAb
+  Status: Error processing Instruction 2: custom program error: 0x1770
+  Log Messages:
+    Program ComputeBudget111111111111111111111111111111 invoke [1]
+    Program ComputeBudget111111111111111111111111111111 success
+    Program Arcj82pX7HxYKLR92qvgZUAd7vGS1k4hQvAFcPATFdEQ invoke [1]
+    Program log: Instruction: CallbackComputation
+    Program data: m9Xun/BMpxMaPUbv1lwqqA6CNGLin92ea3lcWA4cAibUMeyL9ll5Gq2tyf404CCT
+    Program data: G0t13b/V/fkaPUbv1lwqqA6CNGLin92ea3lcWA4cAibUMeyL9ll5Gq2tyf404CCTAQLFTIDvzzXKYaYJn6cmZBVhN/59LuW4NmL4i70h+0GH6A==
+    Program Arcj82pX7HxYKLR92qvgZUAd7vGS1k4hQvAFcPATFdEQ consumed 35630 of 802850 compute units
+    Program Arcj82pX7HxYKLR92qvgZUAd7vGS1k4hQvAFcPATFdEQ success
+    Program ydrxmpqAVEYBhSWaqYScMh4yCsBLFb7e7jQuQJvjyR4 invoke [1]
+    Program log: Instruction: InitM6Callback
+    Program log: Verify output failed with error: AnchorError(AnchorError { error_name: "AbortedComputation", error_code_number: 6000, error_msg: "AbortedComputation", error_origin: None, compared_values: None })
+    Program log: AnchorError occurred. Error Code: AbortedComputation. Error Number: 6000. Error Message: The Arcium computation was aborted.
+    Program ydrxmpqAVEYBhSWaqYScMh4yCsBLFb7e7jQuQJvjyR4 consumed 21427 of 767220 compute units
+    Program ydrxmpqAVEYBhSWaqYScMh4yCsBLFb7e7jQuQJvjyR4 failed: custom program error: 0x1770
+Transaction executed in slot 459327856:
+  Signature: 3MPmvq4MWkAgVxPySNVs5DBRwXr2onVLxXTPAEeqryE6AXV6GgDkDA8YM8dVsLvyGPvsDt3VkEpve1enEHKdWEas
+  Status: Error processing Instruction 2: custom program error: 0x1770
+  Log Messages:
+    Program ComputeBudget111111111111111111111111111111 invoke [1]
+    Program ComputeBudget111111111111111111111111111111 success
+    Program Arcj82pX7HxYKLR92qvgZUAd7vGS1k4hQvAFcPATFdEQ invoke [1]
+    Program log: Instruction: CallbackComputation
+    Program data: m9Xun/BMpxMaPUbv1lwqqA6CNGLin92ea3lcWA4cAibUMeyL9ll5Gq2tyf404CCT
+    Program data: G0t13b/V/fkaPUbv1lwqqA6CNGLin92ea3lcWA4cAibUMeyL9ll5Gq2tyf404CCTAQIxk/1oMmZ8h5A6XxcWVDCSO/WLiZBzF1W5tQZvUIumGA==
+    Program Arcj82pX7HxYKLR92qvgZUAd7vGS1k4hQvAFcPATFdEQ consumed 35670 of 802850 compute units
+    Program Arcj82pX7HxYKLR92qvgZUAd7vGS1k4hQvAFcPATFdEQ success
+    Program ydrxmpqAVEYBhSWaqYScMh4yCsBLFb7e7jQuQJvjyR4 invoke [1]
+    Program log: Instruction: InitM6Callback
+    Program log: Verify output failed with error: AnchorError(AnchorError { error_name: "AbortedComputation", error_code_number: 6000, error_msg: "AbortedComputation", error_origin: None, compared_values: None })
+    Program log: AnchorError occurred. Error Code: AbortedComputation. Error Number: 6000. Error Message: The Arcium computation was aborted.
+    Program ydrxmpqAVEYBhSWaqYScMh4yCsBLFb7e7jQuQJvjyR4 consumed 21427 of 767180 compute units
+    Program ydrxmpqAVEYBhSWaqYScMh4yCsBLFb7e7jQuQJvjyR4 failed: custom program error: 0x1770
+Transaction executed in slot 459327856:
+  Signature: 3TZSTxUdhzgrRnd1kvDWvVX97mgELtNAgWm9hm3SSVAAainQZh6bAud2zn2p4eNoZVcdpe8ndcYUSF9xThpXZos1
+  Status: Error processing Instruction 2: custom program error: 0x1770
+  Log Messages:
+    Program ComputeBudget111111111111111111111111111111 invoke [1]
+    Program ComputeBudget111111111111111111111111111111 success
+    Program Arcj82pX7HxYKLR92qvgZUAd7vGS1k4hQvAFcPATFdEQ invoke [1]
+    Program log: Instruction: CallbackComputation
+    Program data: m9Xun/BMpxMaPUbv1lwqqA6CNGLin92ea3lcWA4cAibUMeyL9ll5Gq2tyf404CCT
+    Program data: G0t13b/V/fkaPUbv1lwqqA6CNGLin92ea3lcWA4cAibUMeyL9ll5Gq2tyf404CCTAQLFTIDvzzXKYaYJn6cmZBVhN/59LuW4NmL4i70h+0GH6A==
+    Program Arcj82pX7HxYKLR92qvgZUAd7vGS1k4hQvAFcPATFdEQ consumed 35670 of 802850 compute units
+    Program Arcj82pX7HxYKLR92qvgZUAd7vGS1k4hQvAFcPATFdEQ success
+    Program ydrxmpqAVEYBhSWaqYScMh4yCsBLFb7e7jQuQJvjyR4 invoke [1]
+    Program log: Instruction: InitM6Callback
+    Program log: Verify output failed with error: AnchorError(AnchorError { error_name: "AbortedComputation", error_code_number: 6000, error_msg: "AbortedComputation", error_origin: None, compared_values: None })
+    Program log: AnchorError occurred. Error Code: AbortedComputation. Error Number: 6000. Error Message: The Arcium computation was aborted.
+    Program ydrxmpqAVEYBhSWaqYScMh4yCsBLFb7e7jQuQJvjyR4 consumed 21427 of 767180 compute units
+    Program ydrxmpqAVEYBhSWaqYScMh4yCsBLFb7e7jQuQJvjyR4 failed: custom program error: 0x1770

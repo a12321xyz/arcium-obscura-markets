@@ -12,7 +12,8 @@
     "build": "npm --prefix frontend run build",
     "frontend:dev": "npm --prefix frontend run dev",
     "frontend:build": "npm --prefix frontend run build",
-    "frontend:lint": "npm --prefix frontend run lint"
+    "frontend:lint": "npm --prefix frontend run lint",
+    "init-market": "ARCIUM_CLUSTER_OFFSET=456 npx ts-node scripts/initialize_market.ts"
   },
   "dependencies": {
     "@arcium-hq/client": "0.9.7",

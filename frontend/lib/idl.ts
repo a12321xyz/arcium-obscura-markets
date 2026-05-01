@@ -5,7 +5,7 @@ export const ARCIUM_OBSCURA_MARKETS_IDL: Idl = {
   "address": PROGRAM_ID.toBase58(),
   "metadata": {
     "name": "arcium_obscura_markets",
-    "version": "0.1.0",
+    "version": "0.1.1-debug-v2",
     "spec": "0.1.0",
     "description": "Arcium Private Prediction and Opinion Markets"
   },
@@ -90,16 +90,87 @@ export const ARCIUM_OBSCURA_MARKETS_IDL: Idl = {
     }
   ],
   "accounts": [
-    { "name": "market", "discriminator": [219, 190, 213, 55, 0, 227, 198, 154] },
-    { "name": "bet", "discriminator": [147, 23, 35, 59, 123, 67, 129, 0] },
-    { "name": "resolution", "discriminator": [41, 57, 122, 105, 56, 126, 172, 184] }
+    {
+      "name": "Market",
+      "discriminator": [219, 190, 213, 55, 0, 227, 198, 154]
+    },
+    {
+      "name": "Bet",
+      "discriminator": [147, 23, 35, 59, 123, 67, 129, 0]
+    },
+    {
+      "name": "Resolution",
+      "discriminator": [41, 57, 122, 105, 56, 126, 172, 184]
+    }
   ],
   "types": [
+    {
+      "name": "Market",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          { "name": "bump", "type": "u8" },
+          { "name": "vaultBump", "type": "u8" },
+          { "name": "creator", "type": "pubkey" },
+          { "name": "marketId", "type": "u64" },
+          { "name": "kind", "type": { "defined": { "name": "MarketKind" } } },
+          { "name": "status", "type": { "defined": { "name": "MarketStatus" } } },
+          { "name": "outcomeCount", "type": "u8" },
+          { "name": "endTime", "type": "i64" },
+          { "name": "quorum", "type": "u32" },
+          { "name": "nextBetId", "type": "u64" },
+          { "name": "acceptedBetCount", "type": "u32" },
+          { "name": "publicMaxEscrowLamports", "type": "u64" },
+          { "name": "publicPoolLamports", "type": "u64" },
+          { "name": "stateNonce", "type": "u128" },
+          { "name": "encryptedState", "type": { "array": [{ "array": ["u8", 32] }, 6] } },
+          { "name": "publicOutcomePools", "type": { "array": ["u64", 4] } },
+          { "name": "question", "type": "string" },
+          { "name": "outcomes", "type": { "vec": "string" } }
+        ]
+      }
+    },
+    {
+      "name": "Bet",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          { "name": "market", "type": "pubkey" },
+          { "name": "bettor", "type": "pubkey" },
+          { "name": "betId", "type": "u64" },
+          { "name": "commitment", "type": { "array": ["u8", 32] } },
+          { "name": "stakedAmount", "type": "u64" },
+          { "name": "isClaimed", "type": "bool" }
+        ]
+      }
+    },
+    {
+      "name": "Resolution",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          { "name": "market", "type": "pubkey" },
+          { "name": "outcome", "type": "u8" }
+        ]
+      }
+    },
     {
       "name": "MarketKind",
       "type": {
         "kind": "enum",
         "variants": [{ "name": "Prediction" }, { "name": "Opinion" }]
+      }
+    },
+    {
+      "name": "MarketStatus",
+      "type": {
+        "kind": "enum",
+        "variants": [
+          { "name": "Initializing" },
+          { "name": "Open" },
+          { "name": "Closed" },
+          { "name": "Resolved" }
+        ]
       }
     }
   ],

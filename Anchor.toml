@@ -6,10 +6,10 @@ resolution = true
 skip-lint = false
 
 [programs.devnet]
-arcium_obscura_markets = "5ReKPSDBcvh8M5nyhVBJsNxdAzC6LfJ5R6wjuApjgLhQ"
+arcium_obscura_markets = "4Bong499epakUpBjRxnfjouWnmXg718yu2KpJeRQv9yZ"
 
 [programs.localnet]
-arcium_obscura_markets = "29bVaakfeBhFm8BbqkehH3iMxHvRYwZ9QHecsi4kJ7on"
+arcium_obscura_markets = "4Bong499epakUpBjRxnfjouWnmXg718yu2KpJeRQv9yZ"
 
 [registry]
 url = "https://api.apr.dev"
@@ -19,4 +19,4 @@ cluster = "localnet"
 wallet = "~/.config/solana/id.json"
 
 [scripts]
-test = "ts-mocha -p ./tsconfig.json -t 1000000 tests/**/*.ts"
+test = "npx ts-mocha -p ./tsconfig.json -t 1000000 tests/**/*.ts"

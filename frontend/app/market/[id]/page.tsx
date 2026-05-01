@@ -52,7 +52,7 @@ export default function MarketPage() {
     </div>
   );
 
-  const total = market.publicOutcomePools.reduce((sum, value) => sum + value, 0);
+  const total = market.publicOutcomePools.reduce((sum, value) => sum + Number(value), 0);
 
   return (
     <div className="space-y-10 pb-20">
@@ -64,7 +64,10 @@ export default function MarketPage() {
               {market.kind}
             </Badge>
             <Badge className={`rounded-full px-4 py-1 text-xs font-bold uppercase tracking-wider border-transparent ${
-              market.status === "Open" ? "bg-green-500/20 text-green-400" : "bg-white/10 text-muted-foreground"
+              market.status === "Open" ? "bg-green-500/20 text-green-400" : 
+              market.status === "Resolved" ? "bg-primary/20 text-primary border-primary/20" :
+              market.status === "Initializing" ? "bg-yellow-500/20 text-yellow-400" :
+              "bg-white/10 text-muted-foreground"
             }`}>
               {market.status}
             </Badge>
@@ -83,7 +86,7 @@ export default function MarketPage() {
       <div className="grid gap-10 lg:grid-cols-[1fr_420px]">
         <div className="space-y-10">
           <div className="grid gap-4 sm:grid-cols-4">
-            <Metric icon={LockKeyhole} label="Volume" value={formatLamports(market.publicPoolLamports)} />
+            <Metric icon={LockKeyhole} label="Volume" value={formatLamports(Number(market.publicPoolLamports))} />
             <Metric icon={Users} label="Participants" value={String(market.acceptedBetCount)} />
             <Metric icon={Clock} label="Closes" value={formatDateTime(market.endTime).split(',')[0]} />
             <Metric icon={Trophy} label="Verified PDA" value={truncateAddress(market.address)} />
@@ -95,7 +98,7 @@ export default function MarketPage() {
             </h2>
             <div className="grid gap-4">
               {market.outcomes.map((outcome, index) => {
-                const pool = market.publicOutcomePools[index] ?? 0;
+                const pool = Number(market.publicOutcomePools[index] ?? 0);
                 const share = total > 0 ? pool / total : 1 / market.outcomes.length;
                 const percentage = percent(share);
                 
@@ -109,16 +112,16 @@ export default function MarketPage() {
                         </p>
                       </div>
                       <div className="text-right">
-                        <p className="text-3xl font-black text-foreground">{percentage}</p>
+                        <p className="text-3xl font-black text-foreground">{total > 0 ? percentage : "??%"}</p>
                         <p className="text-xs font-mono text-muted-foreground uppercase tracking-widest mt-1">
-                          {formatLamports(pool)}
+                          {total > 0 ? formatLamports(pool) : "Encrypted"}
                         </p>
                       </div>
                     </div>
                     <div className="mt-6 h-3 overflow-hidden rounded-full bg-white/5 border border-white/5">
                       <div 
-                        className="h-full rounded-full bg-gradient-to-r from-primary via-secondary to-accent transition-all duration-1000 ease-out" 
-                        style={{ width: percentage }} 
+                        className={`h-full rounded-full bg-gradient-to-r from-primary via-secondary to-accent transition-all duration-1000 ease-out ${total === 0 ? "animate-pulse w-full opacity-30" : ""}`} 
+                        style={{ width: total > 0 ? percentage : "100%" }} 
                       />
                     </div>
                   </div>

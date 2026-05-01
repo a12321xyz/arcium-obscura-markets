@@ -5,7 +5,7 @@ use arcium_anchor::prelude::*;
 use arcium_client::idl::arcium::types::CallbackAccount;
 use arcium_anchor::traits::QueueCompAccs;
 
-const COMP_DEF_OFFSET_INIT_MARKET_STATE: u32 = comp_def_offset("init_market_state");
+const COMP_DEF_OFFSET_INIT_MARKET_STATE: u32 = comp_def_offset("init_m8");
 const COMP_DEF_OFFSET_PLACE_BET: u32 = comp_def_offset("place_bet");
 const COMP_DEF_OFFSET_RESOLVE_PREDICTION_MARKET: u32 = comp_def_offset("resolve_prediction_market");
 const COMP_DEF_OFFSET_RESOLVE_OPINION_MARKET: u32 = comp_def_offset("resolve_opinion_market");
@@ -26,13 +26,13 @@ const PAYOUT_SCALE: u64 = 1_000_000;
 const ENCRYPTED_STATE_OFFSET: u32 = 109;
 const ENCRYPTED_STATE_SIZE: u32 = 32 * 6;
 
-declare_id!("29bVaakfeBhFm8BbqkehH3iMxHvRYwZ9QHecsi4kJ7on");
+declare_id!("4Bong499epakUpBjRxnfjouWnmXg718yu2KpJeRQv9yZ");
 
 #[arcium_program]
 pub mod arcium_obscura_markets {
     use super::*;
 
-    pub fn init_market_state_comp_def(ctx: Context<InitMarketStateCompDef>) -> Result<()> {
+    pub fn init_m8_comp_def(ctx: Context<InitM8CompDef>) -> Result<()> {
         init_comp_def(ctx.accounts, None, None)
     }
 
@@ -97,13 +97,16 @@ pub mod arcium_obscura_markets {
         market.outcomes = outcomes;
 
         ctx.accounts.sign_pda_account.bump = ctx.bumps.sign_pda_account;
+        msg!("Sign PDA: {}", ctx.accounts.sign_pda_account.key());
+        msg!("Cluster Account: {}", ctx.accounts.cluster_account.key());
+        msg!("Sign PDA Bump: {}", ctx.accounts.sign_pda_account.bump);
 
         let args = ArgBuilder::new().build();
         queue_computation(
             ctx.accounts,
             computation_offset,
             args,
-            vec![InitMarketStateCallback::callback_ix(
+            vec![InitM8Callback::callback_ix(
                 computation_offset,
                 &ctx.accounts.mxe_account,
                 &[CallbackAccount {
@@ -118,17 +121,20 @@ pub mod arcium_obscura_markets {
         Ok(())
     }
 
-    #[arcium_callback(encrypted_ix = "init_market_state")]
-    pub fn init_market_state_callback(
-        ctx: Context<InitMarketStateCallback>,
-        output: SignedComputationOutputs<InitMarketStateOutput>,
+    #[arcium_callback(encrypted_ix = "init_m8")]
+    pub fn init_m8_callback(
+        ctx: Context<InitM8Callback>,
+        output: SignedComputationOutputs<InitM8Output>,
     ) -> Result<()> {
         let encrypted_state = match output.verify_output(
             &ctx.accounts.cluster_account,
             &ctx.accounts.computation_account,
         ) {
-            Ok(InitMarketStateOutput { field_0 }) => field_0,
-            Err(_) => return Err(ErrorCode::AbortedComputation.into()),
+            Ok(InitM8Output { field_0 }) => field_0,
+            Err(e) => {
+                msg!("Verify output failed with error: {:?}", e);
+                return Err(ErrorCode::AbortedComputation.into());
+            }
         };
 
         let market = &mut ctx.accounts.market;
@@ -402,7 +408,10 @@ pub mod arcium_obscura_markets {
                             field_4,
                         },
                 }) => (field_0, field_1, field_2, field_3, field_4),
-                Err(_) => return Err(ErrorCode::AbortedComputation.into()),
+                Err(e) => {
+                    msg!("Verify output failed: {:?}", e);
+                    return Err(ErrorCode::AbortedComputation.into());
+                }
             };
 
         finalize_resolution(
@@ -487,7 +496,10 @@ pub mod arcium_obscura_markets {
                             field_4,
                         },
                 }) => (field_0, field_1, field_2, field_3, field_4),
-                Err(_) => return Err(ErrorCode::AbortedComputation.into()),
+                Err(e) => {
+                    msg!("Verify output failed: {:?}", e);
+                    return Err(ErrorCode::AbortedComputation.into());
+                }
             };
 
         finalize_resolution(
@@ -674,9 +686,8 @@ pub struct InitializeMarket<'info> {
         init_if_needed,
         space = 9,
         payer = creator,
-        seeds = [&SIGN_PDA_SEED],
+        seeds = [b"ArciumSignerAccount"],
         bump,
-        address = derive_sign_pda!(),
     )]
     pub sign_pda_account: Box<Account<'info, ArciumSignerAccount>>,
     #[account(address = derive_mxe_pda!())]
@@ -725,16 +736,16 @@ impl<'info> QueueCompAccs<'info> for InitializeMarket<'info> {
         self.arcium_program.to_account_info()
     }
     fn mxe_program(&self) -> Pubkey {
-        self.mxe_account.key()
+        crate::ID
     }
     fn signer_pda_bump(&self) -> u8 {
         self.sign_pda_account.bump
     }
 }
 
-#[callback_accounts("init_market_state")]
+#[callback_accounts("init_m8")]
 #[derive(Accounts)]
-pub struct InitMarketStateCallback<'info> {
+pub struct InitM8Callback<'info> {
     pub arcium_program: Program<'info, Arcium>,
     #[account(address = derive_comp_def_pda!(COMP_DEF_OFFSET_INIT_MARKET_STATE))]
     pub comp_def_account: Box<Account<'info, ComputationDefinitionAccount>>,
@@ -772,9 +783,8 @@ pub struct PlaceEncryptedBet<'info> {
         init_if_needed,
         space = 9,
         payer = bettor,
-        seeds = [&SIGN_PDA_SEED],
+        seeds = [b"ArciumSignerAccount"],
         bump,
-        address = derive_sign_pda!(),
     )]
     pub sign_pda_account: Box<Account<'info, ArciumSignerAccount>>,
     #[account(address = derive_mxe_pda!())]
@@ -823,7 +833,7 @@ impl<'info> QueueCompAccs<'info> for PlaceEncryptedBet<'info> {
         self.arcium_program.to_account_info()
     }
     fn mxe_program(&self) -> Pubkey {
-        self.mxe_account.key()
+        crate::ID
     }
     fn signer_pda_bump(&self) -> u8 {
         self.sign_pda_account.bump
@@ -927,7 +937,7 @@ impl<'info> QueueCompAccs<'info> for ResolvePredictionMarket<'info> {
         self.arcium_program.to_account_info()
     }
     fn mxe_program(&self) -> Pubkey {
-        self.mxe_account.key()
+        crate::ID
     }
     fn signer_pda_bump(&self) -> u8 {
         self.sign_pda_account.bump
@@ -1025,7 +1035,7 @@ impl<'info> QueueCompAccs<'info> for ResolveOpinionMarket<'info> {
         self.arcium_program.to_account_info()
     }
     fn mxe_program(&self) -> Pubkey {
-        self.mxe_account.key()
+        crate::ID
     }
     fn signer_pda_bump(&self) -> u8 {
         self.sign_pda_account.bump
@@ -1073,9 +1083,9 @@ pub struct ClaimWinnings<'info> {
     pub system_program: Program<'info, System>,
 }
 
-#[init_computation_definition_accounts("init_market_state", payer)]
+#[init_computation_definition_accounts("init_m8", payer)]
 #[derive(Accounts)]
-pub struct InitMarketStateCompDef<'info> {
+pub struct InitM8CompDef<'info> {
     #[account(mut)]
     pub payer: Signer<'info>,
     #[account(mut, address = derive_mxe_pda!())]

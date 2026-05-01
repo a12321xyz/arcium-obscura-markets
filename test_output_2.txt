@@ -1,0 +1,176 @@
+Ensuring circuits are registered and uploaded...
+Registering init_m8...
+Circuit init_m8 already registered or registration error: Error: Simulation failed. 
+Message: Transaction simulation failed: Error processing Instruction 0: custom program error: 0x0. 
+Logs: 
+[
+  "Program log: Instruction: InitM8CompDef",
+  "Program Arcj82pX7HxYKLR92qvgZUAd7vGS1k4hQvAFcPATFdEQ invoke [2]",
+  "Program log: Instruction: InitComputationDefinition",
+  "Program 11111111111111111111111111111111 invoke [3]",
+  "Allocate: account Address { address: AwE2mWV957c5nB94mLD5AnUH8iV75Qm1Nf7Vj4de6QA9, base: None } already in use",
+  "Program 11111111111111111111111111111111 failed: custom program error: 0x0",
+  "Program Arcj82pX7HxYKLR92qvgZUAd7vGS1k4hQvAFcPATFdEQ consumed 7877 of 187080 compute units",
+  "Program Arcj82pX7HxYKLR92qvgZUAd7vGS1k4hQvAFcPATFdEQ failed: custom program error: 0x0",
+  "Program 4Bong499epakUpBjRxnfjouWnmXg718yu2KpJeRQv9yZ consumed 20797 of 200000 compute units",
+  "Program 4Bong499epakUpBjRxnfjouWnmXg718yu2KpJeRQv9yZ failed: custom program error: 0x0"
+]. 
+Catch the `SendTransactionError` and call `getLogs()` on it for full details.
+Uploading init_m8...
+Raw circuit acc 0 already exists with sufficient size, skipping
+Circuit init_m8 upload error or already finalized: Error: Simulation failed. 
+Message: Transaction simulation failed: Blockhash not found. 
+Logs: 
+[]. 
+Catch the `SendTransactionError` and call `getLogs()` on it for full details.
+Registering place_bet...
+Circuit place_bet already registered or registration error: Error: Simulation failed. 
+Message: Transaction simulation failed: Error processing Instruction 0: custom program error: 0x0. 
+Logs: 
+[
+  "Program log: Instruction: InitPlaceBetCompDef",
+  "Program Arcj82pX7HxYKLR92qvgZUAd7vGS1k4hQvAFcPATFdEQ invoke [2]",
+  "Program log: Instruction: InitComputationDefinition",
+  "Program 11111111111111111111111111111111 invoke [3]",
+  "Allocate: account Address { address: 2e61BGANCKyqHKvkyYSj4MiMF2h5WEtbzahYB3CfTzyC, base: None } already in use",
+  "Program 11111111111111111111111111111111 failed: custom program error: 0x0",
+  "Program Arcj82pX7HxYKLR92qvgZUAd7vGS1k4hQvAFcPATFdEQ consumed 9675 of 186836 compute units",
+  "Program Arcj82pX7HxYKLR92qvgZUAd7vGS1k4hQvAFcPATFdEQ failed: custom program error: 0x0",
+  "Program 4Bong499epakUpBjRxnfjouWnmXg718yu2KpJeRQv9yZ consumed 22839 of 200000 compute units",
+  "Program 4Bong499epakUpBjRxnfjouWnmXg718yu2KpJeRQv9yZ failed: custom program error: 0x0"
+]. 
+Catch the `SendTransactionError` and call `getLogs()` on it for full details.
+Uploading place_bet...
+Sending resize tx 0 of 8
+Circuit place_bet upload error or already finalized: Error: Simulation failed. 
+Message: Transaction simulation failed: Error processing Instruction 16: custom program error: 0x1. 
+Logs: 
+[
+  "Program 11111111111111111111111111111111 success",
+  "Program Arcj82pX7HxYKLR92qvgZUAd7vGS1k4hQvAFcPATFdEQ consumed 13424 of 1203550 compute units",
+  "Program Arcj82pX7HxYKLR92qvgZUAd7vGS1k4hQvAFcPATFdEQ success",
+  "Program Arcj82pX7HxYKLR92qvgZUAd7vGS1k4hQvAFcPATFdEQ invoke [1]",
+  "Program log: Instruction: EmbiggenRawCircuitAcc",
+  "Program 11111111111111111111111111111111 invoke [2]",
+  "Transfer: insufficient lamports 66056400, need 71270400",
+  "Program 11111111111111111111111111111111 failed: custom program error: 0x1",
+  "Program Arcj82pX7HxYKLR92qvgZUAd7vGS1k4hQvAFcPATFdEQ consumed 11111 of 1190126 compute units",
+  "Program Arcj82pX7HxYKLR92qvgZUAd7vGS1k4hQvAFcPATFdEQ failed: custom program error: 0x1"
+]. 
+Catch the `SendTransactionError` and call `getLogs()` on it for full details.
+Registering resolve_prediction_market...
+Circuit resolve_prediction_market already registered or registration error: Error: Simulation failed. 
+Message: Transaction simulation failed: Error processing Instruction 0: custom program error: 0x0. 
+Logs: 
+[
+  "Program log: Instruction: InitResolvePredictionMarketCompDef",
+  "Program Arcj82pX7HxYKLR92qvgZUAd7vGS1k4hQvAFcPATFdEQ invoke [2]",
+  "Program log: Instruction: InitComputationDefinition",
+  "Program 11111111111111111111111111111111 invoke [3]",
+  "Allocate: account Address { address: 36Rei4yHECqDbd2CwPCNTLCVLUkYJ1Zhf5KuMrxLJvZL, base: None } already in use",
+  "Program 11111111111111111111111111111111 failed: custom program error: 0x0",
+  "Program Arcj82pX7HxYKLR92qvgZUAd7vGS1k4hQvAFcPATFdEQ consumed 8527 of 186981 compute units",
+  "Program Arcj82pX7HxYKLR92qvgZUAd7vGS1k4hQvAFcPATFdEQ failed: custom program error: 0x0",
+  "Program 4Bong499epakUpBjRxnfjouWnmXg718yu2KpJeRQv9yZ consumed 21546 of 200000 compute units",
+  "Program 4Bong499epakUpBjRxnfjouWnmXg718yu2KpJeRQv9yZ failed: custom program error: 0x0"
+]. 
+Catch the `SendTransactionError` and call `getLogs()` on it for full details.
+Uploading resolve_prediction_market...
+Sending resize tx 0 of 3
+Circuit resolve_prediction_market upload error or already finalized: Error: Simulation failed. 
+Message: Transaction simulation failed: Error processing Instruction 16: custom program error: 0x1. 
+Logs: 
+[
+  "Program 11111111111111111111111111111111 success",
+  "Program Arcj82pX7HxYKLR92qvgZUAd7vGS1k4hQvAFcPATFdEQ consumed 10213 of 1251718 compute units",
+  "Program Arcj82pX7HxYKLR92qvgZUAd7vGS1k4hQvAFcPATFdEQ success",
+  "Program Arcj82pX7HxYKLR92qvgZUAd7vGS1k4hQvAFcPATFdEQ invoke [1]",
+  "Program log: Instruction: EmbiggenRawCircuitAcc",
+  "Program 11111111111111111111111111111111 invoke [2]",
+  "Transfer: insufficient lamports 66056400, need 71270400",
+  "Program 11111111111111111111111111111111 failed: custom program error: 0x1",
+  "Program Arcj82pX7HxYKLR92qvgZUAd7vGS1k4hQvAFcPATFdEQ consumed 7900 of 1241505 compute units",
+  "Program Arcj82pX7HxYKLR92qvgZUAd7vGS1k4hQvAFcPATFdEQ failed: custom program error: 0x1"
+]. 
+Catch the `SendTransactionError` and call `getLogs()` on it for full details.
+Registering resolve_opinion_market...
+Circuit resolve_opinion_market already registered or registration error: Error: Simulation failed. 
+Message: Transaction simulation failed: Error processing Instruction 0: custom program error: 0x0. 
+Logs: 
+[
+  "Program log: Instruction: InitResolveOpinionMarketCompDef",
+  "Program Arcj82pX7HxYKLR92qvgZUAd7vGS1k4hQvAFcPATFdEQ invoke [2]",
+  "Program log: Instruction: InitComputationDefinition",
+  "Program 11111111111111111111111111111111 invoke [3]",
+  "Allocate: account Address { address: BV2P7eZPBCtF5Z51QAkMfdJxrm4pbdXhh4G69u3oCG3d, base: None } already in use",
+  "Program 11111111111111111111111111111111 failed: custom program error: 0x0",
+  "Program Arcj82pX7HxYKLR92qvgZUAd7vGS1k4hQvAFcPATFdEQ consumed 10027 of 186978 compute units",
+  "Program Arcj82pX7HxYKLR92qvgZUAd7vGS1k4hQvAFcPATFdEQ failed: custom program error: 0x0",
+  "Program 4Bong499epakUpBjRxnfjouWnmXg718yu2KpJeRQv9yZ consumed 23049 of 200000 compute units",
+  "Program 4Bong499epakUpBjRxnfjouWnmXg718yu2KpJeRQv9yZ failed: custom program error: 0x0"
+]. 
+Catch the `SendTransactionError` and call `getLogs()` on it for full details.
+Uploading resolve_opinion_market...
+Sending resize tx 0 of 3
+Circuit resolve_opinion_market upload error or already finalized: Error: Simulation failed. 
+Message: Transaction simulation failed: Error processing Instruction 16: custom program error: 0x1. 
+Logs: 
+[
+  "Program 11111111111111111111111111111111 success",
+  "Program Arcj82pX7HxYKLR92qvgZUAd7vGS1k4hQvAFcPATFdEQ consumed 9476 of 1262780 compute units",
+  "Program Arcj82pX7HxYKLR92qvgZUAd7vGS1k4hQvAFcPATFdEQ success",
+  "Program Arcj82pX7HxYKLR92qvgZUAd7vGS1k4hQvAFcPATFdEQ invoke [1]",
+  "Program log: Instruction: EmbiggenRawCircuitAcc",
+  "Program 11111111111111111111111111111111 invoke [2]",
+  "Transfer: insufficient lamports 66056400, need 71270400",
+  "Program 11111111111111111111111111111111 failed: custom program error: 0x1",
+  "Program Arcj82pX7HxYKLR92qvgZUAd7vGS1k4hQvAFcPATFdEQ consumed 7163 of 1253304 compute units",
+  "Program Arcj82pX7HxYKLR92qvgZUAd7vGS1k4hQvAFcPATFdEQ failed: custom program error: 0x1"
+]. 
+Catch the `SendTransactionError` and call `getLogs()` on it for full details.
+Creating test market on devnet...
+AnchorError: AnchorError thrown in programs/arcium/src/instructions/computation.rs:204. Error Code: ComputationDefinitionNotCompleted. Error Number: 6300. Error Message: Computation definition is not completed.
+    at AnchorError.parse (/home/user1/arcium-obscura-markets/node_modules/@coral-xyz/anchor/src/error.ts:152:14)
+    at translateError (/home/user1/arcium-obscura-markets/node_modules/@coral-xyz/anchor/src/error.ts:277:35)
+    at MethodsBuilder.rpc [as _rpcFn] (/home/user1/arcium-obscura-markets/node_modules/@coral-xyz/anchor/src/program/namespace/rpc.ts:35:29)
+    at processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at main (/home/user1/arcium-obscura-markets/scripts/initialize_market.ts:114:14) {
+  errorLogs: [
+    'Program log: AnchorError thrown in programs/arcium/src/instructions/computation.rs:204. Error Code: ComputationDefinitionNotCompleted. Error Number: 6300. Error Message: Computation definition is not completed.'
+  ],
+  logs: [
+    'Program 4Bong499epakUpBjRxnfjouWnmXg718yu2KpJeRQv9yZ invoke [1]',
+    'Program log: Instruction: InitializeMarket',
+    'Program 11111111111111111111111111111111 invoke [2]',
+    'Program 11111111111111111111111111111111 success',
+    'Program 11111111111111111111111111111111 invoke [2]',
+    'Program 11111111111111111111111111111111 success',
+    'Program log: Sign PDA: FWYx6FNaUhpjtauNJ2mHrWJV5ih4BFrPaUQpZzvQA2m4',
+    'Program log: Cluster Account: DzaQCyfybroycrNqE5Gk7LhSbWD2qfCics6qptBFbr95',
+    'Program log: Sign PDA Bump: 255',
+    'Program Arcj82pX7HxYKLR92qvgZUAd7vGS1k4hQvAFcPATFdEQ invoke [2]',
+    'Program log: Instruction: QueueComputation',
+    'Program 11111111111111111111111111111111 invoke [3]',
+    'Program 11111111111111111111111111111111 success',
+    'Program log: AnchorError thrown in programs/arcium/src/instructions/computation.rs:204. Error Code: ComputationDefinitionNotCompleted. Error Number: 6300. Error Message: Computation definition is not completed.',
+    'Program Arcj82pX7HxYKLR92qvgZUAd7vGS1k4hQvAFcPATFdEQ consumed 31523 of 131224 compute units',
+    'Program Arcj82pX7HxYKLR92qvgZUAd7vGS1k4hQvAFcPATFdEQ failed: custom program error: 0x189c',
+    'Program 4Bong499epakUpBjRxnfjouWnmXg718yu2KpJeRQv9yZ consumed 100299 of 200000 compute units',
+    'Program 4Bong499epakUpBjRxnfjouWnmXg718yu2KpJeRQv9yZ failed: custom program error: 0x189c'
+  ],
+  error: {
+    errorCode: { code: 'ComputationDefinitionNotCompleted', number: 6300 },
+    errorMessage: 'Computation definition is not completed',
+    comparedValues: undefined,
+    origin: {
+      file: 'programs/arcium/src/instructions/computation.rs',
+      line: 204
+    }
+  },
+  _programErrorStack: ProgramErrorStack {
+    stack: [
+      [PublicKey [PublicKey(4Bong499epakUpBjRxnfjouWnmXg718yu2KpJeRQv9yZ)]],
+      [PublicKey [PublicKey(Arcj82pX7HxYKLR92qvgZUAd7vGS1k4hQvAFcPATFdEQ)]]
+    ]
+  }
+}

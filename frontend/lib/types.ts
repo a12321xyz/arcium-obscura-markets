@@ -1,21 +1,26 @@
 export type MarketKind = "Prediction" | "Opinion";
-export type MarketStatus = "Open" | "Resolving" | "Resolved" | "Cancelled";
+export type MarketStatus = "Initializing" | "Open" | "Resolving" | "Resolved" | "Cancelled";
 
 export type Market = {
   address: string;
+  bump: number;
+  vaultBump: number;
   creator: string;
   marketId: string;
   kind: MarketKind;
   status: MarketStatus;
-  question: string;
-  outcomes: string[];
+  outcomeCount: number;
   endTime: number;
   quorum: number;
-  acceptedBetCount: number;
-  publicMaxEscrowLamports: number;
-  publicPoolLamports: number;
-  publicOutcomePools: number[];
   nextBetId: bigint;
+  acceptedBetCount: number;
+  publicMaxEscrowLamports: bigint;
+  publicPoolLamports: bigint;
+  stateNonce: bigint;
+  encryptedState: number[][];
+  publicOutcomePools: bigint[];
+  question: string;
+  outcomes: string[];
 };
 
 export type LocalBetReceipt = {

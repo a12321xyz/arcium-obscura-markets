@@ -79,31 +79,52 @@ function enumName(value: unknown): string {
 function normalizeMarket(address: PublicKey, account: any): Market {
   return {
     address: address.toBase58(),
+    bump: account.bump,
+    vaultBump: account.vaultBump,
     creator: account.creator?.toBase58?.() ?? "",
     marketId: String(asNumber(account.marketId)),
     kind: enumName(account.kind) as MarketKind,
     status: enumName(account.status) as MarketStatus,
+    outcomeCount: account.outcomeCount,
     question: account.question ?? "Untitled market",
     outcomes: account.outcomes ?? ["Yes", "No"],
     endTime: asNumber(account.endTime),
     quorum: asNumber(account.quorum),
+    nextBetId: account.nextBetId ? BigInt(account.nextBetId.toString()) : 0n,
     acceptedBetCount: asNumber(account.acceptedBetCount),
-    publicMaxEscrowLamports: asNumber(account.publicMaxEscrowLamports),
-    publicPoolLamports: asNumber(account.publicPoolLamports),
-    publicOutcomePools: (account.publicOutcomePools ?? [0, 0, 0, 0]).map(asNumber),
-    nextBetId: account.nextBetId ? BigInt(account.nextBetId.toString()) : 0n
+    publicMaxEscrowLamports: account.publicMaxEscrowLamports ? BigInt(account.publicMaxEscrowLamports.toString()) : 0n,
+    publicPoolLamports: account.publicPoolLamports ? BigInt(account.publicPoolLamports.toString()) : 0n,
+    stateNonce: account.stateNonce ? BigInt(account.stateNonce.toString()) : 0n,
+    encryptedState: account.encryptedState ?? [],
+    publicOutcomePools: (account.publicOutcomePools ?? []).map((v: any) => BigInt(v.toString()))
   };
 }
 
 export async function fetchMarkets(connection: Connection, wallet: WalletContextState): Promise<Market[]> {
   try {
-    if (!wallet.publicKey) return demoMarkets;
-    const provider = getAnchorProvider(connection, wallet);
+    // Create a read-only provider if wallet is not connected
+    const provider = new AnchorProvider(
+      connection,
+      wallet.publicKey ? (wallet as any) : { publicKey: PublicKey.default },
+      { commitment: "confirmed" }
+    );
     const program = getProgram(provider);
     const accounts = await program.account.market.all();
-    if (!accounts.length) return demoMarkets;
-    return accounts.map((item: any) => normalizeMarket(item.publicKey, item.account));
-  } catch {
+    console.log(`Fetched ${accounts.length} raw market accounts`);
+    
+    const realMarkets = accounts.map((item: any) => {
+      try {
+        return normalizeMarket(item.publicKey, item.account);
+      } catch (err) {
+        console.error("Failed to normalize market:", item.publicKey.toBase58(), err);
+        return null;
+      }
+    }).filter(Boolean) as Market[];
+
+    console.log(`Successfully normalized ${realMarkets.length} markets`);
+    return realMarkets.length > 0 ? realMarkets : demoMarkets;
+  } catch (e) {
+    console.error("Error fetching markets:", e);
     return demoMarkets;
   }
 }
@@ -127,16 +148,30 @@ export async function fetchMarketByAddress(
 }
 
 async function arciumAccounts(programId: PublicKey, computationOffset: BN, circuit: string) {
+  console.log("arciumAccounts entry", { programId: programId.toBase58(), circuit });
   const arcium = (await import("@arcium-hq/client")) as any;
-  const env = arcium.getArciumEnv();
-  const offset = readU32Le(arcium.getCompDefAccOffset(circuit));
+  console.log("arcium client imported");
+  const clusterOffset = 456;
+  const offsetRaw = arcium.getCompDefAccOffset(circuit);
+  console.log("offsetRaw:", offsetRaw);
+  const offset = readU32Le(offsetRaw);
+  console.log(`Arcium debug: circuit=${circuit}, offset=${offset}, cluster=${clusterOffset}`);
+  const mxeAccount = arcium.getMXEAccAddress(programId);
+  console.log("mxeAccount:", mxeAccount.toBase58());
+  const [signPda] = PublicKey.findProgramAddressSync([Buffer.from("ArciumSignerAccount")], programId);
+  console.log("signPda:", signPda.toBase58());
+  
   return {
-    computationAccount: arcium.getComputationAccAddress(env.arciumClusterOffset, computationOffset),
-    clusterAccount: arcium.getClusterAccAddress(env.arciumClusterOffset),
-    mxeAccount: arcium.getMXEAccAddress(programId),
-    mempoolAccount: arcium.getMempoolAccAddress(env.arciumClusterOffset),
-    executingPool: arcium.getExecutingPoolAccAddress(env.arciumClusterOffset),
-    compDefAccount: arcium.getCompDefAccAddress(programId, offset)
+    computationAccount: arcium.getComputationAccAddress(clusterOffset, computationOffset),
+    clusterAccount: arcium.getClusterAccAddress(clusterOffset),
+    mxeAccount,
+    mempoolAccount: arcium.getMempoolAccAddress(clusterOffset),
+    executingPool: arcium.getExecutingPoolAccAddress(clusterOffset),
+    compDefAccount: arcium.getCompDefAccAddress(programId, offset),
+    signPdaAccount: signPda,
+    poolAccount: arcium.getFeePoolAccAddress(),
+    clockAccount: arcium.getClockAccAddress(),
+    arciumProgram: arcium.getArciumProgramId()
   };
 }
 
@@ -150,12 +185,35 @@ export async function createMarketTx(input: {
   quorum: number;
   computationOffset: BN;
 }) {
-  const program = getProgram(input.provider);
+  console.log("createMarketTx entry", { 
+    marketId: input.marketId.toString(),
+    idlVersion: (ARCIUM_OBSCURA_MARKETS_IDL as any).metadata?.version
+  });
+  let program;
+  try {
+    program = getProgram(input.provider);
+    console.log("Program initialized successfully");
+  } catch (e) {
+    console.error("Failed to initialize Anchor Program:", e);
+    throw e;
+  }
   const creator = input.provider.wallet.publicKey;
+  console.log("Creator:", creator?.toBase58());
   const [market] = deriveMarketPda(creator, input.marketId);
+  console.log("Market PDA:", market.toBase58());
   const [vault] = deriveVaultPda(market);
-  const accounts = await arciumAccounts(PROGRAM_ID, input.computationOffset, "init_market_state");
+  console.log("Vault PDA:", vault.toBase58());
+  console.log("Calling arciumAccounts...");
+  const accounts = await arciumAccounts(PROGRAM_ID, input.computationOffset, "init_m8");
+  console.log("Arcium accounts resolved");
   const kind = input.kind === "Prediction" ? { prediction: {} } : { opinion: {} };
+
+  console.log("Creating market with accounts:", {
+    creator: creator.toBase58(),
+    market: market.toBase58(),
+    vault: vault.toBase58(),
+    ...Object.fromEntries(Object.entries(accounts).map(([k, v]) => [k, (v as any).toBase58?.() ?? v]))
+  });
 
   return program.methods
     .initializeMarket(
