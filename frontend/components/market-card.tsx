@@ -4,7 +4,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Market } from "@/lib/types";
-import { formatDateTime, formatLamports, percent } from "@/lib/utils";
+import { formatDateTime, formatLamports } from "@/lib/utils";
 
 export function MarketCard({ market }: { market: Market }) {
   return (

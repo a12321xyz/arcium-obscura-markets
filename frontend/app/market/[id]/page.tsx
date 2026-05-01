@@ -15,6 +15,7 @@ export default function MarketPage() {
   const params = useParams<{ id: string }>();
   const { connection } = useConnection();
   const wallet = useWallet();
+  const { publicKey } = wallet;
   const [market, setMarket] = useState<Market | null>(null);
   const [loading, setLoading] = useState(true);
 
@@ -30,7 +31,7 @@ export default function MarketPage() {
     return () => {
       active = false;
     };
-  }, [connection, params.id, wallet]);
+  }, [connection, params.id, publicKey]);
 
   if (loading) return (
     <div className="space-y-6">

@@ -36,6 +36,10 @@ export function BetPanel({ market }: { market: Market }) {
       return;
     }
 
+    if (isNaN(Number(amountSol)) || isNaN(Number(maxStakeSol))) {
+      setStatus("Please enter valid numeric amounts.");
+      return;
+    }
     const amountLamports = BigInt(Math.floor(Number(amountSol) * 1_000_000_000));
     const maxStakeLamports = BigInt(Math.floor(Number(maxStakeSol) * 1_000_000_000));
     if (amountLamports <= 0n || maxStakeLamports < amountLamports) {

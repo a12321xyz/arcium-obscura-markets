@@ -1,5 +1,5 @@
 export type MarketKind = "Prediction" | "Opinion";
-export type MarketStatus = "Initializing" | "Open" | "Resolving" | "Resolved" | "Cancelled";
+export type MarketStatus = "Initializing" | "Open" | "Closed" | "Resolved";
 
 export type Market = {
   address: string;

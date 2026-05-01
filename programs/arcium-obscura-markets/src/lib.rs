@@ -436,6 +436,7 @@ pub mod arcium_obscura_markets {
         require!(market.kind == MarketKind::Opinion, ErrorCode::WrongMarketKind);
         require!(market.status == MarketStatus::Open, ErrorCode::MarketNotOpen);
         require!(Clock::get()?.unix_timestamp >= market.end_time, ErrorCode::MarketNotEnded);
+        require!(ctx.accounts.resolver.key() == market.creator, ErrorCode::Unauthorized);
 
         market.status = MarketStatus::Resolving;
         init_resolution_account(
