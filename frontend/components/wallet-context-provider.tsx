@@ -11,8 +11,8 @@ import { RPC_URL } from "@/lib/constants";
 export function WalletContextProvider({ children }: { children: ReactNode }) {
   const wallets = useMemo(
     () => [
-      new SolflareWalletAdapter({ network: WalletAdapterNetwork.Devnet }),
       new PhantomWalletAdapter(),
+      new SolflareWalletAdapter(),
     ],
     []
   );

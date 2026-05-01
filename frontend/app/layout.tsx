@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import "@solana/wallet-adapter-react-ui/styles.css";
 import { WalletContextProvider } from "@/components/wallet-context-provider";
 import { Header } from "@/components/header";
 
