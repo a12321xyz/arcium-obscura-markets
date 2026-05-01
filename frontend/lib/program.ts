@@ -102,13 +102,16 @@ function normalizeMarket(address: PublicKey, account: any): Market {
 
 export async function fetchMarkets(connection: Connection, wallet: WalletContextState): Promise<Market[]> {
   try {
-    // Create a read-only provider if wallet is not connected
-    const readOnlyWallet = { publicKey: SystemProgram.programId };
-    const provider = new AnchorProvider(
-      connection,
-      wallet.publicKey ? (wallet as any) : readOnlyWallet,
-      { commitment: "confirmed" }
-    );
+    const readOnlyWallet = wallet.publicKey
+      ? (wallet as any)
+      : {
+          publicKey: SystemProgram.programId,
+          signTransaction: async (tx: any) => tx,
+          signAllTransactions: async (txs: any[]) => txs,
+        };
+    const provider = new AnchorProvider(connection, readOnlyWallet, {
+      commitment: "confirmed",
+    });
     const program = getProgram(provider);
     console.log(`[Diagnostic] Fetching markets for Program ID: ${PROGRAM_ID.toBase58()}`);
     console.log(`[Diagnostic] RPC Endpoint: ${connection.rpcEndpoint}`);
@@ -139,11 +142,25 @@ export async function fetchMarketByAddress(
 ): Promise<Market | null> {
   const demo = demoMarkets.find((market) => market.address === address || market.marketId === address);
   try {
-    if (!wallet.publicKey || demo) return demo ?? null;
-    const provider = getAnchorProvider(connection, wallet);
-    const program = getProgram(provider);
     const publicKey = new PublicKey(address);
-    const account = await program.account.market.fetch(publicKey);
+    let account: any;
+    if (wallet.publicKey) {
+      const provider = getAnchorProvider(connection, wallet);
+      const program = getProgram(provider);
+      account = await program.account.market.fetch(publicKey);
+    } else {
+      const provider = new AnchorProvider(
+        connection,
+        {
+          publicKey: SystemProgram.programId,
+          signTransaction: async (tx: any) => tx,
+          signAllTransactions: async (txs: any[]) => txs,
+        },
+        { commitment: "confirmed" }
+      );
+      const program = getProgram(provider);
+      account = await program.account.market.fetch(publicKey);
+    }
     return normalizeMarket(publicKey, account);
   } catch {
     return demo ?? null;
