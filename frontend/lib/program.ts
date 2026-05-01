@@ -109,6 +109,7 @@ export async function fetchMarkets(connection: Connection, wallet: WalletContext
       { commitment: "confirmed" }
     );
     const program = getProgram(provider);
+    console.log(`[Diagnostic] Fetching markets for Program ID: ${PROGRAM_ID.toBase58()} on RPC: ${connection.rpcEndpoint}`);
     const accounts = await program.account.market.all();
     console.log(`Fetched ${accounts.length} raw market accounts`);
     
