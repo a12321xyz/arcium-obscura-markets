@@ -23,14 +23,12 @@ export function WalletContextProvider({ children }: { children: ReactNode }) {
     []
   );
 
-  if (!mounted) {
-    return <div style={{ visibility: 'hidden' }}>{children}</div>;
-  }
-
   return (
     <ConnectionProvider endpoint={RPC_URL} config={{ commitment: "confirmed" }}>
       <WalletProvider wallets={wallets} autoConnect>
-        <WalletModalProvider>{children}</WalletModalProvider>
+        <WalletModalProvider>
+          {mounted ? children : <div style={{ visibility: "hidden" }}>{children}</div>}
+        </WalletModalProvider>
       </WalletProvider>
     </ConnectionProvider>
   );

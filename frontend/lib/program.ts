@@ -103,9 +103,10 @@ function normalizeMarket(address: PublicKey, account: any): Market {
 export async function fetchMarkets(connection: Connection, wallet: WalletContextState): Promise<Market[]> {
   try {
     // Create a read-only provider if wallet is not connected
+    const readOnlyWallet = { publicKey: SystemProgram.programId };
     const provider = new AnchorProvider(
       connection,
-      wallet.publicKey ? (wallet as any) : { publicKey: PublicKey.default },
+      wallet.publicKey ? (wallet as any) : readOnlyWallet,
       { commitment: "confirmed" }
     );
     const program = getProgram(provider);

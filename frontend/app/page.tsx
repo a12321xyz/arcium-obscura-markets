@@ -15,6 +15,7 @@ import { Market } from "@/lib/types";
 export default function HomePage() {
   const { connection } = useConnection();
   const wallet = useWallet();
+  const { publicKey } = wallet;
   const [markets, setMarkets] = useState<Market[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -31,7 +32,7 @@ export default function HomePage() {
     return () => {
       active = false;
     };
-  }, [connection, wallet]);
+  }, [connection, publicKey]);
 
   return (
     <div className="space-y-16 pb-20">
