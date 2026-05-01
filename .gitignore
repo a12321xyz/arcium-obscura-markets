@@ -10,3 +10,5 @@ build/
 .env.local
 *.log
 dist/
+*_kp.json
+*wallet.json
