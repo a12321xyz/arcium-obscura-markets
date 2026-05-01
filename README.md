@@ -1,180 +1,91 @@
-# Arcium Obscura Markets
+# 🌌 Arcium Obscura Markets
+> **Privacy-preserving Prediction & Opinion Markets for the Arcium RTG Developer challenge.**
 
-Arcium Obscura Markets is a privacy-preserving Prediction & Opinion Markets dApp for the Arcium RTG Developer OFFCHAIN category.
+[![Solana Devnet](https://img.shields.io/badge/Solana-Devnet-14F195?style=for-the-badge&logo=solana&logoColor=white)](https://explorer.solana.com/address/4Bong499epakUpBjRxnfjouWnmXg718yu2KpJeRQv9yZ?cluster=devnet)
+[![Arcium Powered](https://img.shields.io/badge/Arcium-MPC-5F5FFF?style=for-the-badge&logo=arcium&logoColor=white)](https://arcium.com)
 
-Users create markets, connect Phantom or Solflare, and place encrypted private bets. The selected outcome and amount are encrypted in the browser with `@arcium-hq/client`, processed by Arcium MPC, and settled on Solana through an Anchor program.
+Arcium Obscura Markets is a decentralized platform where stakes, votes, and resolution inputs remain encrypted. By leveraging Arcium's Multi-Party Computation (MPC) cluster, we eliminate **herding bias** and **conformity pressure**, allowing for truly honest price discovery on Solana.
 
-## Why Arcium
+---
 
-Public prediction markets leak user intent. A visible bet can be copied, front-run, socially pressured, or used to bias the market before the event resolves. Arcium Obscura Markets changes that flow:
+## 🏛️ The Vision: Solving the "Public Signal" Problem
+In traditional prediction markets, every bet is public. This creates a feedback loop where participants copy "whales" rather than voting on their own information. **Arcium Obscura** breaks this loop:
 
-```text
-User browser
-  encrypt(amount, outcome) with Arcium SDK
-        |
-        v
-Solana Anchor program
-  queues encrypted instruction
-        |
-        v
-Arcium MXE / MPC cluster
-  updates encrypted pools and resolves privately
-        |
-        v
-On-chain callback
-  stores aggregate odds and final payout ratio only
+- **Invisible Intent:** Your choice stays encrypted in the MPC cluster.
+- **Unbiased Odds:** Market-level odds are derived from aggregate pools without revealing individual behavior.
+- **Private Resolution:** Opinion markets use encrypted collective voting to reach consensus without bandwagon effects.
+
+---
+
+## 🛠️ Tech Stack
+
+| Layer | Technology | Role |
+| :--- | :--- | :--- |
+| **Blockchain** | Solana (Devnet) | Final settlement and state transparency |
+| **Privacy** | Arcium MPC | Encrypted computation and pool aggregation |
+| **Contract** | Anchor 0.32.1 | Program logic and Arcium callbacks |
+| **Frontend** | Next.js 14 + Tailwind | Premium Dark-mode UX/UI |
+| **SDK** | `@arcium-hq/client` | Client-side X25519 encryption |
+
+---
+
+## 📐 Architecture
+```mermaid
+graph TD
+    User((User)) -->|Encrypt Amount/Outcome| SDK[Arcium SDK]
+    SDK -->|Queue Computation| Solana[Solana Program]
+    Solana -->|MXE Trigger| MPC[Arcium MPC Cluster]
+    MPC -->|Process Ciphertexts| MPC
+    MPC -->|Signed Callback| Solana
+    Solana -->|Update Aggregate Pool| UI[Market Dashboard]
 ```
 
-Privacy benefits:
+### 🔒 Security Model: Commit-Reveal-MPC
+1. **Client-Side Encryption:** Bets are encrypted in the browser with `Rescue` ciphers. No plaintext ever touches an RPC or Validator.
+2. **Encrypted State:** The `Market` account stores an `encrypted_state` array that only the Arcium cluster can decrypt.
+3. **Trustless Settlement:** Payout ratios are calculated inside the MPC cluster. The Solana program only accepts results signed by the cluster nodes.
+4. **Local Receipt Model:** Your "Salt" stays in your browser, ensuring that even if a cluster is compromised post-resolution, your historical intent remains secret.
 
-- Individual bet amount and chosen outcome stay hidden during the decision window.
-- Arcium MPC updates market state without exposing plaintext bets to validators, RPCs, or other users.
-- Only aggregate pool data is revealed publicly, so the UI can display market-level odds without doxxing individual behavior.
-- Opinion markets resolve from encrypted collective voting, which reduces conformity pressure and public-bandwagon bias.
-- Over-collateralized escrow hides the exact stake until post-resolution claim; unused escrow is refunded.
+---
 
-## Features
+## 🚀 Deployment Info
+- **Program ID:** `4Bong499epakUpBjRxnfjouWnmXg718yu2KpJeRQv9yZ`
+- **Track:** Developer OFFCHAIN
+- **Category:** Privacy-Preserving Computation
+- **Live Demo:** [arcium-obscura-markets.vercel.app](https://arcium-obscura-markets.vercel.app)
 
-- Prediction markets resolved by creator/oracle after an external event.
-- Opinion markets resolved by encrypted quorum voting without an external truth source.
-- Two to four outcomes per market.
-- Wallet connection with Phantom and Solflare.
-- Encrypted bet placement with Arcium SDK and MXE computation queue.
-- Public aggregate odds and volume, private individual bets.
-- PDA vault escrow and post-resolution claim flow.
-- Local browser receipts for claim reveals. No backend database.
-- Mobile-first dark UI with Arcium-style cyan/violet visual language.
+---
 
-## Architecture
+## 🛠️ Local Development
 
-```text
-arcium-obscura-markets/
-  Anchor.toml
-  Arcium.toml
-  Cargo.toml
-  package.json
-  programs/arcium-obscura-markets/
-    Cargo.toml
-    src/lib.rs
-  encrypted-ixs/
-    Cargo.toml
-    src/lib.rs
-    src/place_bet.rs
-    src/resolve_market.rs
-  frontend/
-    app/
-    components/
-    lib/
-  tests/obscura_markets.ts
-```
-
-## Important Compatibility Note
-
-The prompt requested Anchor `0.30.1` and latest Arcium. Current published Arcium crates (`arcium-anchor`/`arcium-client` `0.9.7`) require `anchor-lang` `0.32.1`. This repository uses the current Arcium-compatible stack so the program follows the deployable `queue_computation`, `#[arcium_callback]`, and `SignedComputationOutputs` patterns used by official Arcium examples.
-
-## Local Setup
-
-Install free tooling:
-
+### 1. Prerequisites
 ```bash
+# Install Arcium Tooling
 curl --proto '=https' --tlsv1.2 -sSfL https://install.arcium.com/ | bash
-avm install 0.32.1
-avm use 0.32.1
-solana config set --url devnet
+avm install 0.32.1 && avm use 0.32.1
 ```
 
-Install dependencies:
-
+### 2. Build & Test
 ```bash
-npm install
-npm --prefix frontend install
-```
-
-Build Arcium circuits and Anchor program:
-
-```bash
+# Build Arcium circuits and Anchor program
 arcium build
-```
 
-Run local Arcium tests:
-
-```bash
+# Run local Arcium tests
 arcium test
 ```
 
-Run the frontend locally:
-
-```bash
-npm --prefix frontend run dev
-```
-
-Open `http://localhost:3000`.
-
-## Devnet Deploy
-
-Configure a funded devnet wallet:
-
-```bash
-solana config set --url devnet
-solana airdrop 2
-```
-
-Deploy program and circuits:
-
-```bash
-arcium deploy --provider.cluster devnet
-```
-
-Initialize computation definitions on devnet by running the test bootstrap or by invoking:
-
-```bash
-arcium test --provider.cluster devnet --skip-local-validator
-```
-
-Set frontend env:
-
+### 3. Frontend
 ```bash
 cd frontend
-cp ../.env.example .env.local
+npm install
+npm run dev
 ```
 
-Update `NEXT_PUBLIC_ARCIUM_OBSCURA_PROGRAM_ID` if you redeploy with a new program id.
+---
 
-## Vercel Deploy
+## 🎬 Proof of Work
+- **Live Submission:** [arcium-obscura-markets.vercel.app](https://arcium-obscura-markets.vercel.app)
+- **Devnet Explorer:** [View Program](https://explorer.solana.com/address/4Bong499epakUpBjRxnfjouWnmXg718yu2KpJeRQv9yZ?cluster=devnet)
 
-The frontend is static/Next.js only and uses Solana devnet plus Arcium client helpers. No backend or paid service is required.
-
-```bash
-cd frontend
-npm install -g vercel
-vercel
-vercel env add NEXT_PUBLIC_SOLANA_RPC_URL
-vercel env add NEXT_PUBLIC_ARCIUM_OBSCURA_PROGRAM_ID
-vercel --prod
-```
-
-Use `https://api.devnet.solana.com` and your deployed program id for the env values.
-
-## 🎬 Demo & Proof of Work
-
-- **Live Submission URL**: [Your Vercel URL will appear here]
-- **Devnet Program ID**: `29bVaakfeBhFm8BbqkehH3iMxHvRYwZ9QHecsi4kJ7on`
-- **Screenshots**:
-  ![Landing Page](https://via.placeholder.com/800x450?text=Arcium+Obscura+Markets+Dashboard)
-  ![Encrypted Bet](https://via.placeholder.com/800x450?text=Encrypted+MPC+Betting+Flow)
-
-## 🛡️ Detailed Security Model
-
-Arcium Obscura Markets is built on a **Commit-Reveal-MPC** architecture designed to maximize fairness in prediction environments.
-
-1.  **Intent Privacy**: Individual bets are encrypted client-side using `X25519` key exchange and the `Rescue` cipher. Neither the Solana validator nor the RPC provider can see your chosen outcome or amount.
-2.  **Anti-Herding**: Since only aggregate pool data is revealed, "whales" cannot trigger panic or FOMO by flashing large bets. The market moves purely on collective conviction.
-3.  **MPC-Signed Payouts**: The final payout ratio is calculated inside the Arcium MPC cluster. The Solana program only accepts results signed by the cluster, preventing the program creator from manipulating resolution.
-4.  **Local Receipt Model**: Your "Salt" never leaves your browser until you claim. This means that even if the entire MPC cluster was compromised *after* the market resolved, your original bet outcome remains secret until you reveal it to claim.
-5.  **Future Scalability**: In production, the "Public Escrow" can be replaced by **Token-2022 Confidential Transfers** or Arcium-native tokens for 100% amount privacy during the settlement phase.
-
-## 🏆 RTG Submission category
-
-**Track**: Developer OFFCHAIN
-**Category**: Privacy-Preserving Computation
-**Integration**: Arcium MXE, signed-callbacks, encrypted state management.
+> [!IMPORTANT]
+> This project was built for the Arcium RTG Developer Challenge. It demonstrates the power of Multi-Party Computation in restoring fairness and privacy to on-chain financial primitives.
